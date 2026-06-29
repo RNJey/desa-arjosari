@@ -25,7 +25,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center fw-bold text-success" href="{{ url('/') }}">
-                <div class="bg-success text-white rounded-circle d-inline-flex justify-content-center align-items-center me-2" style="width: 35px; height: 35px; font-size: 14px;">DA</div>
+                <img src="{{ asset('images/logo-desa.png') }}" alt="Logo Desa Arjosari" style="height: 40px; width: auto;" class="me-2">
                 Desa Arjosari
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -113,11 +113,10 @@
         <div class="container">
             <div class="row g-4">
                 <!-- Brand & Address -->
-                <div class="col-md-4">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="bg-success text-white rounded-circle d-inline-flex justify-content-center align-items-center me-2" style="width: 40px; height: 40px; font-size: 16px; font-weight: bold;">DA</div>
-                        <h5 class="fw-bold mb-0 text-white">Desa Arjosari</h5>
-                    </div>
+                <div class="d-flex align-items-center mb-3">
+                    <img src="{{ asset('images/logo-desa.png') }}" alt="Logo Desa Arjosari" style="height: 45px; width: auto;" class="me-2 bg-white p-1 rounded-circle">
+                    <h5 class="fw-bold mb-0 text-white">Desa Arjosari</h5>
+                </div>
                     
                     <p class="small footer-text mb-4">Jl. Raya Arjosari, Kec. Kalipare, Kab. Malang,<br>Jawa Timur 65165</p>
                     <div class="d-flex gap-2">
@@ -134,7 +133,7 @@
                         <li class="mb-2"><a href="#" class="footer-text text-decoration-none"><i class="bi bi-arrow-right text-success me-1"></i> Beranda</a></li>
                         <li class="mb-2"><a href="#" class="footer-text text-decoration-none"><i class="bi bi-arrow-right text-success me-1"></i> Profil Desa</a></li>
                         <li class="mb-2"><a href="#" class="footer-text text-decoration-none"><i class="bi bi-arrow-right text-success me-1"></i> Peta Desa</a></li>
-                        <li class="mb-2"><a href="#" class="footer-text text-decoration-none"><i class="bi bi-arrow-right text-success me-1"></i> Produk Desa</a></li>
+                        <li class="mb-2"><a href="#" class="footer-text text-decoration-none"><i class="bi bi-arrow-right text-success me-1"></i> Potensi Desa</a></li>
                         <li class="mb-2"><a href="#" class="footer-text text-decoration-none"><i class="bi bi-arrow-right text-success me-1"></i> Berita</a></li>
                     </ul>
                 </div>

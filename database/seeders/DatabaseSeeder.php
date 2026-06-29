@@ -1,7 +1,8 @@
 <?php
 
 namespace Database\Seeders;
-
+use App\Models\Setting;
+use App\Models\Post;
 use Illuminate\Database\Seeder;
 use App\Models\Page;
 
@@ -9,6 +10,36 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+
+    // --- DATA SINKRONISASI HALAMAN UTAMA ---
+        
+        // 1. Data Statistik (Settings)
+        Setting::updateOrCreate(['key' => 'penduduk'], ['value' => '7.019']);
+        Setting::updateOrCreate(['key' => 'kk'], ['value' => '1.940']);
+        Setting::updateOrCreate(['key' => 'luas'], ['value' => '1.490,7']);
+        Setting::updateOrCreate(['key' => 'dusun'], ['value' => '6']);
+
+        // 2. Data Berita Terbaru (Posts)
+        Post::updateOrCreate(
+            ['slug' => 'musyawarah-desa-apbdes'],
+            [
+                'title' => 'Musyawarah Desa Arjosari Bahas APBD Tahun Depan',
+                'category' => 'Informasi Publik',
+                'image' => 'https://source.unsplash.com/800x400/?meeting,village',
+                'content' => 'Pemerintah Desa Arjosari menggelar musyawarah perencanaan pembangunan desa yang dihadiri oleh seluruh elemen masyarakat...'
+            ]
+        );
+
+        Post::updateOrCreate(
+            ['slug' => 'panen-raya-jagung'],
+            [
+                'title' => 'Panen Raya Jagung Hibrida Kelompok Tani',
+                'category' => 'Potensi Desa',
+                'image' => 'https://source.unsplash.com/800x400/?agriculture,farm',
+                'content' => 'Kelompok tani di Dusun Krajan berhasil melakukan panen raya jagung hibrida dengan hasil yang meningkat signifikan...'
+            ]
+        );
+        
         // 1. Data Sejarah Desa
         Page::updateOrCreate(
             ['slug' => 'sejarah-desa'],

@@ -2,7 +2,7 @@
 
 @section('content')
 <!-- Hero Section -->
-<div class="position-relative" style="background-image: url('https://source.unsplash.com/1600x900/?mountain,village'); background-size: cover; background-position: center; min-height: 60vh;">
+<div class="position-relative" style="background-image: url('{{ asset('images/banner-arjosari.JPEG') }}'); background-size: cover; background-position: center; min-height: 60vh;">
     <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark" style="opacity: 0.6;"></div>
     
     <div class="container position-relative z-index-1 d-flex flex-column justify-content-center h-100 text-white" style="padding-top: 10vh;">
@@ -11,20 +11,20 @@
         <p class="lead">Kec. Kalipare, Kab. Malang, Jawa Timur 65165</p>
         
         <div class="d-flex gap-3 mt-4">
-            <a href="#" class="btn btn-success px-4 py-2 fw-semibold rounded-pill">Profil Desa</a>
-            <a href="#" class="btn btn-outline-light px-4 py-2 fw-semibold rounded-pill">Lihat Peta Desa</a>
+            <a href="{{ url('halaman/sejarah-desa') }}" class="btn btn-success px-4 py-2 fw-semibold rounded-pill">Profil Desa</a>
+            <a href="{{ url('halaman/peta-wilayah') }}" class="btn btn-outline-light px-4 py-2 fw-semibold rounded-pill">Lihat Peta Desa</a>
         </div>
     </div>
 </div>
 
-<!-- Statistik Section (Grid System) -->
+<!-- Statistik Section -->
 <div class="container" style="margin-top: -50px; position: relative; z-index: 2;">
     <div class="row g-4">
         <div class="col-md-3 col-6">
             <div class="card border-0 shadow-sm rounded-4 text-center py-4 h-100">
                 <div class="card-body">
                     <i class="bi bi-people text-success fs-1 mb-2"></i>
-                    <h3 class="fw-bold text-success mb-0">7.019</h3>
+                    <h3 class="fw-bold text-success mb-0">{{ $settings['penduduk'] ?? '0' }}</h3>
                     <p class="text-muted small mb-0">Penduduk (Jiwa)</p>
                 </div>
             </div>
@@ -33,8 +33,8 @@
             <div class="card border-0 shadow-sm rounded-4 text-center py-4 h-100">
                 <div class="card-body">
                     <i class="bi bi-house-door text-success fs-1 mb-2"></i>
-                    <h3 class="fw-bold text-success mb-0">1.940</h3>
-                    <p class="text-700 small mb-0">Keluarga (KK)</p>
+                    <h3 class="fw-bold text-success mb-0">{{ $settings['kk'] ?? '0' }}</h3>
+                    <p class="text-muted small mb-0">Keluarga (KK)</p>
                 </div>
             </div>
         </div>
@@ -42,7 +42,7 @@
             <div class="card border-0 shadow-sm rounded-4 text-center py-4 h-100">
                 <div class="card-body">
                     <i class="bi bi-map text-success fs-1 mb-2"></i>
-                    <h3 class="fw-bold text-success mb-0">1.490,7</h3>
+                    <h3 class="fw-bold text-success mb-0">{{ $settings['luas'] ?? '0' }}</h3>
                     <p class="text-muted small mb-0">Luas Wilayah (Ha)</p>
                 </div>
             </div>
@@ -51,7 +51,7 @@
             <div class="card border-0 shadow-sm rounded-4 text-center py-4 h-100">
                 <div class="card-body">
                     <i class="bi bi-geo-alt text-success fs-1 mb-2"></i>
-                    <h3 class="fw-bold text-success mb-0">6</h3>
+                    <h3 class="fw-bold text-success mb-0">{{ $settings['dusun'] ?? '0' }}</h3>
                     <p class="text-muted small mb-0">Dusun</p>
                 </div>
             </div>
@@ -66,8 +66,9 @@
         <p class="text-muted small">Akses layanan dan informasi desa dengan mudah</p>
     </div>
     <div class="row g-4">
+        <!-- Kotak 1: Profil Desa -->
         <div class="col-md-3 col-6">
-            <a href="#" class="text-decoration-none">
+            <a href="{{ url('halaman/sejarah-desa') }}" class="text-decoration-none">
                 <div class="card border-0 shadow-sm rounded-4 h-100 p-3 transition-hover">
                     <div class="card-body">
                         <div class="bg-success bg-opacity-10 rounded-circle d-inline-flex p-3 mb-3"><i class="bi bi-file-earmark-text text-success fs-4"></i></div>
@@ -77,8 +78,10 @@
                 </div>
             </a>
         </div>
+        
+        <!-- Kotak 2: Pengaduan -->
         <div class="col-md-3 col-6">
-            <a href="#" class="text-decoration-none">
+            <a href="#pengaduan-masyarakat" class="text-decoration-none">
                 <div class="card border-0 shadow-sm rounded-4 h-100 p-3 transition-hover">
                     <div class="card-body">
                         <div class="bg-danger bg-opacity-10 rounded-circle d-inline-flex p-3 mb-3"><i class="bi bi-megaphone text-danger fs-4"></i></div>
@@ -88,19 +91,23 @@
                 </div>
             </a>
         </div>
+        
+        <!-- Kotak 3: Potensi Desa -->
         <div class="col-md-3 col-6">
-            <a href="#" class="text-decoration-none">
+            <a href="{{ url('halaman/pertanian') }}" class="text-decoration-none">
                 <div class="card border-0 shadow-sm rounded-4 h-100 p-3 transition-hover">
                     <div class="card-body">
                         <div class="bg-warning bg-opacity-10 rounded-circle d-inline-flex p-3 mb-3"><i class="bi bi-bag text-warning fs-4"></i></div>
-                        <h6 class="fw-bold text-dark">Produk Desa</h6>
-                        <p class="text-muted small mb-0">Produk unggulan & UMKM</p>
+                        <h6 class="fw-bold text-dark">Potensi Desa</h6>
+                        <p class="text-muted small mb-0">Pertanian, perkebunan & UMKM</p>
                     </div>
                 </div>
             </a>
         </div>
+        
+        <!-- Kotak 4: Peta Desa -->
         <div class="col-md-3 col-6">
-            <a href="#" class="text-decoration-none">
+            <a href="{{ url('halaman/peta-wilayah') }}" class="text-decoration-none">
                 <div class="card border-0 shadow-sm rounded-4 h-100 p-3 transition-hover">
                     <div class="card-body">
                         <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex p-3 mb-3"><i class="bi bi-map text-primary fs-4"></i></div>
@@ -113,68 +120,98 @@
     </div>
 </div>
 
-<!-- Berita Terbaru Section -->
-<div class="container mb-5" style="margin-top: 5rem;">
+<!-- CONTAINER UNTUK BERITA & POTENSI -->
+<div class="container" style="margin-top: 5rem;">
     <div class="d-flex justify-content-between align-items-end mb-4">
         <div>
-            <h4 class="fw-bold mb-1">Berita Terbaru</h4>
+            <h3 class="fw-bold text-dark mb-1">Berita Terbaru</h3>
             <p class="text-muted small mb-0">Informasi dan berita terkini</p>
         </div>
-        <a href="#" class="text-success text-decoration-none fw-semibold small">Lihat Semua <i class="bi bi-arrow-right"></i></a>
+        <a href="{{ url('berita') }}" class="text-success text-decoration-none fw-semibold small">Lihat Semua <i class="bi bi-arrow-right"></i></a>
     </div>
-    <div class="row g-4">
-        <div class="col-md-6">
-            <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
-                <img src="https://source.unsplash.com/800x400/?meeting,village" class="card-img-top" alt="Berita 1" style="height: 200px; object-fit: cover;">
-                <div class="card-body p-4">
-                    <span class="badge bg-success bg-opacity-10 text-success mb-2">Informasi Publik</span>
-                    <h5 class="fw-bold mb-2">Musyawarah Desa Arjosari Bahas APBD 2024</h5>
-                    <p class="text-muted small mb-3">Pemerintah Desa Arjosari menggelar musyawarah perencanaan pembangunan desa...</p>
-                    <p class="text-muted small mb-0"><i class="bi bi-calendar3 me-1"></i> 28 Juni 2026</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
-                <img src="https://source.unsplash.com/800x400/?agriculture,farm" class="card-img-top" alt="Berita 2" style="height: 200px; object-fit: cover;">
-                <div class="card-body p-4">
-                    <span class="badge bg-success bg-opacity-10 text-success mb-2">Potensi Desa</span>
-                    <h5 class="fw-bold mb-2">Panen Raya Jagung Hibrida</h5>
-                    <p class="text-muted small mb-3">Kelompok tani di Dusun Krajan berhasil melakukan panen raya jagung hibrida...</p>
-                    <p class="text-muted small mb-0"><i class="bi bi-calendar3 me-1"></i> 25 Juni 2026</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
-<!-- Bagian Potensi Desa -->
-<div class="container mb-5">
-    <div class="mb-4">
-        <h4 class="fw-bold mb-1">Potensi Desa</h4>
-        <p class="text-muted small">Potensi dan keunggulan Desa Arjosari</p>
-    </div>
-    <div class="row g-3">
-        @php
-            $potensi = [
-                ['title' => 'Pertanian', 'desc' => 'Lahan subur 8 Ha', 'img' => 'https://source.unsplash.com/400x300/?vegetables,farm'],
-                ['title' => 'UMKM', 'desc' => '45 unit usaha aktif', 'img' => 'https://source.unsplash.com/400x300/?store,market'],
-                ['title' => 'Wisata', 'desc' => 'Alam & budaya lokal', 'img' => 'https://source.unsplash.com/400x300/?nature,village'],
-                ['title' => 'Budaya', 'desc' => 'Seni tradisi Jawa', 'img' => 'https://source.unsplash.com/400x300/?dance,culture']
-            ];
-        @endphp
-        
-        @foreach($potensi as $p)
-        <div class="col-md-3 col-6">
-            <div class="card border-0 rounded-4 overflow-hidden position-relative" style="height: 150px;">
-                <img src="{{ $p['img'] }}" class="w-100 h-100 object-fit-cover" alt="{{ $p['title'] }}">
-                <div class="position-absolute bottom-0 start-0 w-100 p-3" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);">
-                    <h6 class="text-white fw-bold mb-0">{{ $p['title'] }}</h6>
-                    <small class="text-white opacity-75" style="font-size: 0.75rem;">{{ $p['desc'] }}</small>
+    <!-- Grid Berita -->
+    <div class="row g-4 mb-5">
+        @forelse($beritaTerbaru as $berita)
+        <div class="col-md-6">
+            <a href="{{ url('berita/' . $berita->slug) }}" class="text-decoration-none text-dark">
+                <div class="card border-0 shadow-sm rounded-4 overflow-hidden transition-hover h-100 bg-light">
+                    <img src="{{ $berita->image }}" onerror="this.style.display='none'" class="card-img-top object-fit-cover" alt="{{ $berita->title }}" style="height: 200px; width: 100%;">
+                    <div class="card-body p-4 bg-white">
+                        <span class="badge bg-success bg-opacity-10 text-success mb-3">{{ $berita->category }}</span>
+                        <h5 class="fw-bold mb-2">{{ $berita->title }}</h5>
+                        <p class="text-muted small mb-3">{{ Str::limit(strip_tags($berita->content), 100) }}</p>
+                        <p class="text-muted small mb-0"><i class="bi bi-calendar3 me-1"></i> {{ $berita->created_at->translatedFormat('d F Y') }}</p>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
-        @endforeach
+        @empty
+        <div class="col-12 text-center text-muted py-4">
+            <p>Belum ada berita terbaru.</p>
+        </div>
+        @endforelse
+    </div>
+
+    <!-- Potensi Desa Header -->
+    <div class="mb-4 mt-5">
+        <h3 class="fw-bold text-dark mb-1">Potensi Desa</h3>
+        <p class="text-muted small mb-0">Potensi dan keunggulan Desa Arjosari</p>
+    </div>
+
+    <!-- Grid Potensi -->
+    <div class="row g-3 mb-5">
+        <!-- Card Pertanian -->
+        <div class="col-md-3 col-6">
+            <a href="{{ url('halaman/pertanian') }}" class="text-decoration-none text-white">
+                <div class="card border-0 rounded-4 overflow-hidden position-relative transition-hover bg-secondary" style="height: 180px;">
+                    <img src="{{ asset('images/potensi-pertanian.jpg') }}" onerror="this.style.display='none'" class="w-100 h-100 object-fit-cover" alt="Pertanian">
+                    <div class="position-absolute bottom-0 start-0 w-100 p-3" style="background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);">
+                        <h6 class="fw-bold mb-0">Pertanian</h6>
+                        <small class="text-light">Lahan subur 574 Ha</small>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Card Perkebunan -->
+        <div class="col-md-3 col-6">
+            <a href="{{ url('halaman/perkebunan') }}" class="text-decoration-none text-white">
+                <div class="card border-0 rounded-4 overflow-hidden position-relative transition-hover bg-secondary" style="height: 180px;">
+                    <img src="{{ asset('images/potensi-perkebunan.jpg') }}" onerror="this.style.display='none'" class="w-100 h-100 object-fit-cover" alt="Perkebunan">
+                    <div class="position-absolute bottom-0 start-0 w-100 p-3" style="background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);">
+                        <h6 class="fw-bold mb-0">Perkebunan</h6>
+                        <small class="text-light">Tebu, Kopi, Kelapa</small>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Card Peternakan -->
+        <div class="col-md-3 col-6">
+            <a href="{{ url('halaman/peternakan') }}" class="text-decoration-none text-white">
+                <div class="card border-0 rounded-4 overflow-hidden position-relative transition-hover bg-secondary" style="height: 180px;">
+                    <img src="{{ asset('images/potensi-peternakan.jpg') }}" onerror="this.style.display='none'" class="w-100 h-100 object-fit-cover" alt="Peternakan">
+                    <div class="position-absolute bottom-0 start-0 w-100 p-3" style="background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);">
+                        <h6 class="fw-bold mb-0">Peternakan</h6>
+                        <small class="text-light">Sapi & Kambing</small>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Card Budaya -->
+        <div class="col-md-3 col-6">
+            <a href="{{ url('halaman/seni-tradisi') }}" class="text-decoration-none text-white">
+                <div class="card border-0 rounded-4 overflow-hidden position-relative transition-hover bg-secondary" style="height: 180px;">
+                    <img src="{{ asset('images/potensi-budaya.jpg') }}" onerror="this.style.display='none'" class="w-100 h-100 object-fit-cover" alt="Seni Budaya">
+                    <div class="position-absolute bottom-0 start-0 w-100 p-3" style="background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);">
+                        <h6 class="fw-bold mb-0">Seni Budaya</h6>
+                        <small class="text-light">Seni Tradisi Jawa</small>
+                    </div>
+                </div>
+            </a>
+        </div>
     </div>
 </div>
 
@@ -219,14 +256,14 @@
     </div>
 </div>
 
-<!-- Banner Pengaduan -->
-<div class="container mb-5">
+<!-- Banner Pengaduan dengan ID -->
+<div class="container mb-5" id="pengaduan-masyarakat">
     <div class="bg-success text-white rounded-4 p-4 p-md-5 position-relative overflow-hidden shadow">
         <div class="position-relative z-index-1">
             <div class="d-flex align-items-center mb-2"><i class="bi bi-megaphone me-2"></i> <small class="text-uppercase tracking-wide">Layanan Masyarakat</small></div>
             <h2 class="fw-bold mb-3">Sampaikan Pengaduan Anda</h2>
             <p class="mb-4">Kami siap mendengar dan menyelesaikan setiap masalah dengan cepat</p>
-            <a href="#" class="btn btn-outline-light rounded-pill px-4">Informasi Pengaduan <i class="bi bi-chevron-down ms-2"></i></a>
+            <a href="mailto:arjosari@malangkab.go.id" class="btn btn-outline-light rounded-pill px-4">Kirim Email Pengaduan <i class="bi bi-envelope ms-2"></i></a>
         </div>
         <div class="position-absolute top-0 end-0 bg-white opacity-10 rounded-circle" style="width: 300px; height: 300px; transform: translate(30%, -30%);"></div>
     </div>

@@ -1,12 +1,17 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Setting;
+use App\Models\Post;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
 
 // Halaman Beranda Utama
 Route::get('/', function () {
-    return view('welcome');
+    $settings = Setting::pluck('value', 'key')->toArray();
+    $beritaTerbaru = Post::latest()->take(2)->get();
+    
+    return view('welcome', compact('settings', 'beritaTerbaru'));
 })->name('beranda');
 
 // Group Route untuk Profil Desa

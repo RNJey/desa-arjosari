@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Page; // Panggil Model Page
+use App\Models\Page;
 
 class PageController extends Controller
 {
-    // Method untuk halaman statis spesifik
+    // Method untuk menampilkan halaman statis berdasarkan slug
     public function sejarah()
     {
-        return view('pages.sejarah'); // Nanti kita buat file resources/views/pages/sejarah.blade.php
+        return view('pages.sejarah');
     }
 
     public function visiMisi()
@@ -38,13 +38,13 @@ class PageController extends Controller
         return view('pages.pembagian');
     }
 
-    // Method dinamis (Catch-All) yang sangat menghemat waktu
+    // Method dinamis
     public function showDynamic($slug)
     {
         // 1. Cari data halaman berdasarkan slug
         $page = \App\Models\Page::where('slug', $slug)->firstOrFail();
 
-        // 2. Buat Peta Menu (Mapping Menu) untuk Sidebar
+        // 2. Mapping Menu
         $menuGroups = [
             'profil' => [
                 'title' => 'Profil Desa',
@@ -96,7 +96,7 @@ class PageController extends Controller
             ]
         ];
 
-        // 3. Deteksi otomatis: Halaman yang dibuka masuk kelompok mana?
+        // 3. Deteksi Halaman yang dibuka
         $activeGroup = null;
         foreach ($menuGroups as $group) {
             if (array_key_exists($slug, $group['links'])) {
