@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.front')
 
 @section('content')
 <!-- Hero Section -->
@@ -179,8 +179,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Lingkaran Dekoratif Background -->
-                    <div class="position-absolute bottom-0 end-0 bg-white opacity-10 rounded-circle" style="width: 200px; height: 200px; transform: translate(30%, 30%);"></div>
                 </div>
             </a>
         </div>

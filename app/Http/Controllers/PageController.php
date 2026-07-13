@@ -70,6 +70,13 @@ class PageController extends Controller
                     'peternakan' => 'Peternakan',
                 ]
             ],
+            'berita' => [
+                'title' => 'Berita',
+                'links' => [
+                    'pengumuman' => 'Pengumuman',
+                    'agenda-desa' => 'Agenda Desa',
+                ]
+            ],
             'budaya' => [
                 'title' => 'Budaya',
                 'links' => [

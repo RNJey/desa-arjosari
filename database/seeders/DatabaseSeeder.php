@@ -11,6 +11,16 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
+    // Membuat Akun Admin Permanen
+        \App\Models\User::updateOrCreate(
+            ['email' => 'admin@arjosari.desa.id'],
+            [
+                'name' => 'Admin Desa',
+                'password' => bcrypt('password123'), // Password default
+                'email_verified_at' => now(),
+            ]
+        );
+
     // --- DATA SINKRONISASI HALAMAN UTAMA ---
         
         // 1. Data Statistik (Settings)
