@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
             [
                 'title' => 'Panen Raya Jagung Hibrida Kelompok Tani',
                 'category' => 'Potensi Desa',
-                'image' => 'https://source.unsplash.com/800x400/?agriculture,farm',
+                'image' => 'https://source.unsplash.com/800x400/?harvest,corn',
                 'content' => 'Kelompok tani di Dusun Krajan berhasil melakukan panen raya jagung hibrida dengan hasil yang meningkat signifikan...'
             ]
         );
@@ -64,7 +64,7 @@ class DatabaseSeeder extends Seeder
                 'title' => 'Pemerintahan Desa',
                 'content' => '
                     <div class="content-text">
-                        <p class="mb-4">Pemerintah Desa Arjosari dipimpin oleh seorang Kepala Desa dan dibantu oleh perangkat desa serta Kepala Dusun untuk melayani masyarakat di 6 wilayah dusun: Sumbertimo, Tumpakmiri, Kedungwaru I, Kedungwaru II, Sidodadi, dan Mentaraman.</p>
+                        <p class="mb-4">Pemerintah Desa Arjosari dipimpin oleh seorang Kepala Desa dan dibantu oleh perangkat desa serta Kepala Dusun untuk melayani masyarakat di 6 wilayah dusun.</p>
                         
                         <h5 class="fw-bold mb-3">Daftar Perangkat Desa</h5>
                         <div class="table-responsive mb-5">
@@ -93,7 +93,7 @@ class DatabaseSeeder extends Seeder
                                 </thead>
                                 <tbody>
                                     <tr><td class="fw-semibold">Dusun Sumbertimo</td><td>Joko Subekti</td></tr>
-                                    <tr><td class="fw-semibold">Dusun Tumpakmiri</td><td>Rawat</td></tr>
+                                    <tr><td class="fw-semibold">Dusun Tumpakmiri</td><td>Suli Nurcholis</td></tr>
                                     <tr><td class="fw-semibold">Dusun Kedungwaru I</td><td>Sundarianto</td></tr>
                                     <tr><td class="fw-semibold">Dusun Kedungwaru II</td><td>Piyudianto</td></tr>
                                     <tr><td class="fw-semibold">Dusun Sidodadi</td><td>Yoyok Eko Ermawan</td></tr>
@@ -153,7 +153,7 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        // 5. Data Peta Wilayah
+        // 5. Data Peta Wilayah (Revisi Batas Utara & Timur)
         Page::updateOrCreate(
             ['slug' => 'peta-wilayah'],
             [
@@ -166,10 +166,7 @@ class DatabaseSeeder extends Seeder
                         <div class="card border-0 shadow-sm rounded-4 overflow-hidden mb-5">
                             <div class="card-body p-0">
                                 <div class="ratio ratio-21x9">
-                                    <iframe 
-                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15802.772591605335!2d112.50293625!3d-8.23150535!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e78a2f1ab1f1e31%3A0x6b49ebbc9a9b9220!2sArjosari%2C%20Kec.%20Kalipare%2C%20Kabupaten%20Malang%2C%20Jawa%20Timur!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid" 
-                                        style="border:0;" allowfullscreen="" loading="lazy">
-                                    </iframe>
+                                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15802.772591605335!2d112.50293625!3d-8.23150535!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e78a2f1ab1f1e31%3A0x6b49ebbc9a9b9220!2sArjosari%2C%20Kec.%20Kalipare%2C%20Kabupaten%20Malang%2C%20Jawa%20Timur!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                                 </div>
                             </div>
                         </div>
@@ -179,7 +176,7 @@ class DatabaseSeeder extends Seeder
                             <div class="col-md-6">
                                 <div class="p-3 bg-light rounded-3 border-start border-4 border-success">
                                     <span class="d-block small text-muted fw-bold text-uppercase">Sebelah Utara</span>
-                                    <span class="fw-semibold">Desa Arjowilangun & Kec. Sumberpucung</span>
+                                    <span class="fw-semibold">Desa Kalirejo & Desa Arjowilangun</span>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -191,7 +188,7 @@ class DatabaseSeeder extends Seeder
                             <div class="col-md-6">
                                 <div class="p-3 bg-light rounded-3 border-start border-4 border-success">
                                     <span class="d-block small text-muted fw-bold text-uppercase">Sebelah Timur</span>
-                                    <span class="fw-semibold">Desa Tumpakrejo & Kec. Pagak</span>
+                                    <span class="fw-semibold">Desa Tumpakrejo & Desa Arjowilangun</span>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -201,22 +198,6 @@ class DatabaseSeeder extends Seeder
                                 </div>
                             </div>
                         </div>
-
-                        <h5 class="fw-bold mb-3">Orbitasi (Jarak Pusat Pemerintahan)</h5>
-                        <ul class="list-group list-group-flush mb-4">
-                            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                Jarak ke Ibu Kota Kecamatan (Kalipare)
-                                <span class="fw-semibold text-success">12,00 Km (± 0,5 Jam)</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                Jarak ke Ibu Kota Kabupaten (Malang)
-                                <span class="fw-semibold text-success">54,00 Km (± 2 Jam)</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                Jarak ke Ibu Kota Provinsi (Jawa Timur)
-                                <span class="fw-semibold text-success">196,00 Km (± 5 Jam)</span>
-                            </li>
-                        </ul>
                     </div>
                 '
             ]
@@ -427,7 +408,7 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        // 10. Data Seni Tradisi
+        // 10. Data Seni Tradisi (Revisi Wayang Kulit)
         Page::updateOrCreate(
             ['slug' => 'seni-tradisi'],
             [
@@ -452,7 +433,7 @@ class DatabaseSeeder extends Seeder
                                     <div class="bg-warning bg-opacity-10 rounded-circle d-inline-flex p-3 mx-auto mb-3" style="width: 70px; height: 70px; align-items: center; justify-content: center;">
                                         <i class="bi bi-people text-warning fs-2"></i>
                                     </div>
-                                    <h5 class="fw-bold text-dark mb-2">Wayang Orang / Golek</h5>
+                                    <h5 class="fw-bold text-dark mb-2">Wayang Kulit</h5>
                                     <p class="text-muted small mb-3">Seni pertunjukan tradisional yang masih dipertahankan dengan 3 unit perkumpulan.</p>
                                     <span class="badge bg-light text-dark border">Menyerap 2 Tenaga Kesenian</span>
                                 </div>
@@ -463,7 +444,7 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        // 11. Data Peninggalan
+        // 11. Data Peninggalan (Revisi Hapus Tugu Peringatan)
         Page::updateOrCreate(
             ['slug' => 'peninggalan'],
             [
@@ -480,18 +461,6 @@ class DatabaseSeeder extends Seeder
                                 <div class="col-md-8 p-4">
                                     <h5 class="fw-bold mb-2">Situs Lingga Yoni (Recha Gathel)</h5>
                                     <p class="text-muted small mb-0">Di Dusun Tumpakmiri terdapat peninggalan kuno dari Zaman Hindu Syiwa berupa Lingga Yoni yang ditemukan di tepi sumber mata air terbelit akar pepohonan. Lingga (lambang Dewa Siwa) dan Yoni (lambang Dewi Parwati) ini merupakan bukti bahwa wilayah ini pernah dihuni peradaban kuno sebelum desa resmi berdiri.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card border-0 shadow-sm rounded-4 mb-4 overflow-hidden">
-                            <div class="row g-0">
-                                <div class="col-md-4 bg-primary bg-opacity-10 d-flex align-items-center justify-content-center p-4">
-                                    <i class="bi bi-geo-alt-fill text-primary" style="font-size: 4rem;"></i>
-                                </div>
-                                <div class="col-md-8 p-4">
-                                    <h5 class="fw-bold mb-2">Tugu Peringatan Mentaraman</h5>
-                                    <p class="text-muted small mb-0">Dibangun pada masa pemerintahan Kepala Desa ke-3 (Bapak Soetomo), tugu ini diletakkan di tengah perempatan Mentaraman dan masih dilestarikan serta dipelihara dengan baik hingga saat ini sebagai penanda sejarah desa.</p>
                                 </div>
                             </div>
                         </div>

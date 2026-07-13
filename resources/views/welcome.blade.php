@@ -122,35 +122,68 @@
 
 <!-- CONTAINER UNTUK BERITA & POTENSI -->
 <div class="container" style="margin-top: 5rem;">
-    <div class="d-flex justify-content-between align-items-end mb-4">
-        <div>
-            <h3 class="fw-bold text-dark mb-1">Berita Terbaru</h3>
-            <p class="text-muted small mb-0">Informasi dan berita terkini</p>
-        </div>
-        <a href="{{ url('berita') }}" class="text-success text-decoration-none fw-semibold small">Lihat Semua <i class="bi bi-arrow-right"></i></a>
+    <!-- Bagian Judul yang Sudah Diselaraskan -->
+    <div class="mb-4">
+        <h3 class="fw-bold text-dark mb-1">Informasi & Transparansi</h3>
+        <p class="text-muted small mb-0">Pengumuman resmi publik dan pengelolaan anggaran keuangan Desa Arjosari</p>
     </div>
 
-    <!-- Grid Berita -->
+    <!-- Widget Pengumuman & APBDes -->
     <div class="row g-4 mb-5">
-        @forelse($beritaTerbaru as $berita)
+        <!-- Widget Pengumuman -->
         <div class="col-md-6">
-            <a href="{{ url('berita/' . $berita->slug) }}" class="text-decoration-none text-dark">
-                <div class="card border-0 shadow-sm rounded-4 overflow-hidden transition-hover h-100 bg-light">
-                    <img src="{{ $berita->image }}" onerror="this.style.display='none'" class="card-img-top object-fit-cover" alt="{{ $berita->title }}" style="height: 200px; width: 100%;">
-                    <div class="card-body p-4 bg-white">
-                        <span class="badge bg-success bg-opacity-10 text-success mb-3">{{ $berita->category }}</span>
-                        <h5 class="fw-bold mb-2">{{ $berita->title }}</h5>
-                        <p class="text-muted small mb-3">{{ Str::limit(strip_tags($berita->content), 100) }}</p>
-                        <p class="text-muted small mb-0"><i class="bi bi-calendar3 me-1"></i> {{ $berita->created_at->translatedFormat('d F Y') }}</p>
+            <div class="card border-0 shadow-sm rounded-4 h-100 p-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h5 class="fw-bold mb-0"><i class="bi bi-megaphone text-danger me-2"></i> Pengumuman Desa</h5>
+                    <a href="{{ url('halaman/pengumuman') }}" class="small text-decoration-none text-success fw-semibold">Lihat Semua</a>
+                </div>
+                <div class="list-group list-group-flush">
+                    <a href="{{ url('halaman/pengumuman') }}" class="list-group-item list-group-item-action px-0 border-0 mb-3 transition-hover">
+                        <span class="badge bg-danger bg-opacity-10 text-danger mb-2">Penting</span>
+                        <h6 class="fw-bold mb-1">Pendaftaran Bantuan Langsung Tunai (BLT)</h6>
+                        <small class="text-muted"><i class="bi bi-clock me-1"></i> 2 Hari yang lalu</small>
+                    </a>
+                    <a href="{{ url('halaman/pengumuman') }}" class="list-group-item list-group-item-action px-0 border-0 transition-hover">
+                        <span class="badge bg-success bg-opacity-10 text-success mb-2">Kegiatan</span>
+                        <h6 class="fw-bold mb-1">Kerja Bakti Pembersihan Saluran Irigasi</h6>
+                        <small class="text-muted"><i class="bi bi-clock me-1"></i> 5 Hari yang lalu</small>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Widget APBDes -->
+        <div class="col-md-6">
+            <a href="{{ url('halaman/apbdes') }}" class="text-decoration-none">
+                <div class="card border-0 shadow-sm rounded-4 h-100 p-4 bg-success text-white position-relative overflow-hidden transition-hover">
+                    <div class="position-relative z-index-1">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="fw-bold mb-0"><i class="bi bi-pie-chart text-white me-2"></i> Transparansi APBDes</h5>
+                            <span class="small text-white text-opacity-75">Detail <i class="bi bi-arrow-right"></i></span>
+                        </div>
+                        <p class="small text-white text-opacity-75 mb-1">Total Anggaran Belanja & Penerimaan</p>
+                        <h2 class="fw-bold mb-4">Rp 1.708.145.626</h2>
+                        
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <div class="bg-white bg-opacity-10 rounded-3 p-3 text-center">
+                                    <small class="d-block text-white text-opacity-75 mb-1">Pendapatan Desa</small>
+                                    <span class="fw-bold">Rp 1.708 Juta</span>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="bg-white bg-opacity-10 rounded-3 p-3 text-center">
+                                    <small class="d-block text-white text-opacity-75 mb-1">Alokasi Belanja</small>
+                                    <span class="fw-bold">Rp 1.715 Juta</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <!-- Lingkaran Dekoratif Background -->
+                    <div class="position-absolute bottom-0 end-0 bg-white opacity-10 rounded-circle" style="width: 200px; height: 200px; transform: translate(30%, 30%);"></div>
                 </div>
             </a>
         </div>
-        @empty
-        <div class="col-12 text-center text-muted py-4">
-            <p>Belum ada berita terbaru.</p>
-        </div>
-        @endforelse
     </div>
 
     <!-- Potensi Desa Header -->
@@ -167,7 +200,7 @@
                 <div class="card border-0 rounded-4 overflow-hidden position-relative transition-hover bg-secondary" style="height: 180px;">
                     <img src="{{ asset('images/potensi-pertanian.jpg') }}" onerror="this.style.display='none'" class="w-100 h-100 object-fit-cover" alt="Pertanian">
                     <div class="position-absolute bottom-0 start-0 w-100 p-3" style="background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);">
-                        <h6 class="fw-bold mb-0">Pertanian</h6>
+                        <h6 class="fw-bold mb-0 text-white">Pertanian</h6>
                         <small class="text-light">Lahan subur 574 Ha</small>
                     </div>
                 </div>
@@ -180,7 +213,7 @@
                 <div class="card border-0 rounded-4 overflow-hidden position-relative transition-hover bg-secondary" style="height: 180px;">
                     <img src="{{ asset('images/potensi-perkebunan.jpg') }}" onerror="this.style.display='none'" class="w-100 h-100 object-fit-cover" alt="Perkebunan">
                     <div class="position-absolute bottom-0 start-0 w-100 p-3" style="background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);">
-                        <h6 class="fw-bold mb-0">Perkebunan</h6>
+                        <h6 class="fw-bold mb-0 text-white">Perkebunan</h6>
                         <small class="text-light">Tebu, Kopi, Kelapa</small>
                     </div>
                 </div>
@@ -193,7 +226,7 @@
                 <div class="card border-0 rounded-4 overflow-hidden position-relative transition-hover bg-secondary" style="height: 180px;">
                     <img src="{{ asset('images/potensi-peternakan.jpg') }}" onerror="this.style.display='none'" class="w-100 h-100 object-fit-cover" alt="Peternakan">
                     <div class="position-absolute bottom-0 start-0 w-100 p-3" style="background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);">
-                        <h6 class="fw-bold mb-0">Peternakan</h6>
+                        <h6 class="fw-bold mb-0 text-white">Peternakan</h6>
                         <small class="text-light">Sapi & Kambing</small>
                     </div>
                 </div>
@@ -205,8 +238,8 @@
             <a href="{{ url('halaman/seni-tradisi') }}" class="text-decoration-none text-white">
                 <div class="card border-0 rounded-4 overflow-hidden position-relative transition-hover bg-secondary" style="height: 180px;">
                     <img src="{{ asset('images/potensi-budaya.jpg') }}" onerror="this.style.display='none'" class="w-100 h-100 object-fit-cover" alt="Seni Budaya">
-                    <div class="position-absolute bottom-0 start-0 w-100 p-3" style="background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);">
-                        <h6 class="fw-bold mb-0">Seni Budaya</h6>
+                    <div class="position-absolute bottom-0 start-0 w-100 p-3" style="background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);">
+                        <h6 class="fw-bold mb-0 text-white">Seni Budaya</h6>
                         <small class="text-light">Seni Tradisi Jawa</small>
                     </div>
                 </div>
@@ -218,40 +251,49 @@
 <!-- 3 Widget Info -->
 <div class="container mb-5">
     <div class="row g-4">
+        <!-- Widget Info Pembangunan -->
         <div class="col-md-4">
-            <div class="card border-0 shadow-sm rounded-4 h-100 p-3">
-                <div class="card-body">
-                    <h6 class="fw-bold mb-4"><i class="bi bi-graph-up-arrow text-success me-2"></i> Info Pembangunan</h6>
-                    <div class="mb-3"><div class="d-flex justify-content-between small mb-1"><span>Jalan Desa</span><span class="fw-bold text-success">85%</span></div><div class="progress" style="height: 6px;"><div class="progress-bar bg-success" style="width: 85%;"></div></div></div>
-                    <div class="mb-3"><div class="d-flex justify-content-between small mb-1"><span>Irigasi</span><span class="fw-bold text-success">70%</span></div><div class="progress" style="height: 6px;"><div class="progress-bar bg-success" style="width: 70%;"></div></div></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card border-0 shadow-sm rounded-4 h-100 p-3">
-                <div class="card-body">
-                    <h6 class="fw-bold mb-3"><i class="bi bi-star text-warning me-2"></i> Status IDM</h6>
-                    <div class="text-center bg-success bg-opacity-10 rounded-3 py-3 mb-4">
-                        <h2 class="fw-bold text-success mb-1">0.7245</h2>
-                        <span class="badge bg-success rounded-pill px-3">Maju</span>
-                    </div>
-                    <div class="d-flex justify-content-between small border-bottom pb-2 mb-2"><span>Indeks Sosial</span><span class="fw-bold">0.6890</span></div>
-                    <div class="d-flex justify-content-between small"><span>Indeks Ekonomi</span><span class="fw-bold">0.7120</span></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card border-0 shadow-sm rounded-4 h-100 p-3">
-                <div class="card-body">
-                    <h6 class="fw-bold mb-4"><i class="bi bi-calendar-event text-primary me-2"></i> Agenda Desa</h6>
-                    <div class="d-flex mb-3">
-                        <div class="text-center me-3" style="min-width: 50px;"><div class="fw-bold text-success">20</div><div class="small text-success">Jan</div></div>
-                        <div><div class="fw-semibold small">Rapat BPD</div><div class="text-muted" style="font-size: 0.75rem;"><i class="bi bi-clock"></i> 09:00 WIB</div></div>
+            <a href="{{ url('halaman/info-pembangunan') }}" class="text-decoration-none text-dark">
+                <div class="card border-0 shadow-sm rounded-4 h-100 p-3 transition-hover">
+                    <div class="card-body">
+                        <h6 class="fw-bold mb-4"><i class="bi bi-graph-up-arrow text-success me-2"></i> Info Pembangunan</h6>
+                        <div class="mb-3"><div class="d-flex justify-content-between small mb-1"><span>Jalan Desa</span><span class="fw-bold text-success">85%</span></div><div class="progress" style="height: 6px;"><div class="progress-bar bg-success" style="width: 85%;"></div></div></div>
+                        <div class="mb-3"><div class="d-flex justify-content-between small mb-1"><span>Irigasi</span><span class="fw-bold text-success">70%</span></div><div class="progress" style="height: 6px;"><div class="progress-bar bg-success" style="width: 70%;"></div></div></div>
                     </div>
                 </div>
-            </div>
+            </a>
+        </div>
+
+        <!-- Widget Status IDM -->
+        <div class="col-md-4">
+            <a href="{{ url('halaman/status-idm') }}" class="text-decoration-none text-dark">
+                <div class="card border-0 shadow-sm rounded-4 h-100 p-3 transition-hover">
+                    <div class="card-body">
+                        <h6 class="fw-bold mb-3"><i class="bi bi-star text-warning me-2"></i> Status IDM</h6>
+                        <div class="text-center bg-success bg-opacity-10 rounded-3 py-3 mb-4">
+                            <h2 class="fw-bold text-success mb-1">0.7245</h2>
+                            <span class="badge bg-success rounded-pill px-3">Maju</span>
+                        </div>
+                        <div class="d-flex justify-content-between small border-bottom pb-2 mb-2"><span>Indeks Sosial</span><span class="fw-bold">0.6890</span></div>
+                        <div class="d-flex justify-content-between small"><span>Indeks Ekonomi</span><span class="fw-bold">0.7120</span></div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Widget Agenda Desa -->
+        <div class="col-md-4">
+            <a href="{{ url('halaman/agenda-desa') }}" class="text-decoration-none text-dark">
+                <div class="card border-0 shadow-sm rounded-4 h-100 p-3 transition-hover">
+                    <div class="card-body">
+                        <h6 class="fw-bold mb-4"><i class="bi bi-calendar-event text-primary me-2"></i> Agenda Desa</h6>
+                        <div class="d-flex mb-3">
+                            <div class="text-center me-3" style="min-width: 50px;"><div class="fw-bold text-success">20</div><div class="small text-success">Jan</div></div>
+                            <div><div class="fw-semibold small">Rapat BPD</div><div class="text-muted" style="font-size: 0.75rem;"><i class="bi bi-clock"></i> 09:00 WIB</div></div>
+                        </div>
+                    </div>
+                </div>
+            </a>
         </div>
     </div>
 </div>
