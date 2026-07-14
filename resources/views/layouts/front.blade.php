@@ -98,13 +98,32 @@
                     </li>
                 </ul>
                 
-                <!-- Tombol Pengaduan & Icon Login Admin -->
                 <div class="d-flex align-items-center gap-3 ms-lg-3 mt-3 mt-lg-0">
                     <a href="{{ url('/#pengaduan-masyarakat') }}" class="btn btn-success rounded-pill px-4">Pengaduan</a>
                     
-                    <a href="{{ url('/login') }}" class="text-success transition-hover" title="Login Admin" style="font-size: 1.5rem; line-height: 0;">
-                        <i class="bi bi-box-arrow-in-right"></i>
-                    </a>
+                    @auth
+                        <div class="dropdown">
+                            <a href="#" class="text-danger transition-hover d-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false" title="Menu Admin">
+                                <i class="bi bi-person-check-fill" style="font-size: 1.5rem; line-height: 0;"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 mt-3 rounded-3">
+                                <li><a class="dropdown-item py-2 fw-semibold text-dark" href="{{ route('dashboard') }}"><i class="bi bi-speedometer2 me-2 text-success"></i> Dashboard</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item py-2 text-danger fw-semibold">
+                                            <i class="bi bi-box-arrow-right me-2"></i> Keluar Admin
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    @else
+                        <a href="{{ url('/login') }}" class="text-success transition-hover" title="Login Admin" style="font-size: 1.5rem; line-height: 0;">
+                            <i class="bi bi-box-arrow-in-right"></i>
+                        </a>
+                    @endauth
                 </div>
                 
             </div>

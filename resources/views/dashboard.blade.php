@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             
             @if (session('success'))
-                <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6 rounded shadow-sm" role="alert">
+                <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6 rounded shadow-sm">
                     <p class="font-bold">Berhasil!</p>
                     <p>{{ session('success') }}</p>
                 </div>
@@ -23,30 +23,30 @@
                         @csrf
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Jumlah Penduduk (Jiwa)</label>
-                                <input type="number" name="penduduk" value="{{ $settings['penduduk'] ?? '' }}" class="w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" required>
+                                <x-input-label for="penduduk" value="Jumlah Penduduk (Jiwa)" />
+                                <x-text-input id="penduduk" name="penduduk" type="text" class="mt-1 block w-full" :value="$settings['penduduk'] ?? ''" required />
                             </div>
 
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Jumlah Keluarga (KK)</label>
-                                <input type="number" name="kk" value="{{ $settings['kk'] ?? '' }}" class="w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" required>
+                                <x-input-label for="kk" value="Jumlah Keluarga (KK)" />
+                                <x-text-input id="kk" name="kk" type="text" class="mt-1 block w-full" :value="$settings['kk'] ?? ''" required />
                             </div>
 
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Luas Wilayah (Ha)</label>
-                                <input type="text" name="luas" value="{{ $settings['luas'] ?? '' }}" class="w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" required>
+                                <x-input-label for="luas" value="Luas Wilayah (Ha)" />
+                                <x-text-input id="luas" name="luas" type="text" class="mt-1 block w-full" :value="$settings['luas'] ?? ''" required />
                             </div>
 
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Jumlah Dusun</label>
-                                <input type="number" name="dusun" value="{{ $settings['dusun'] ?? '' }}" class="w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" required>
+                                <x-input-label for="dusun" value="Jumlah Dusun" />
+                                <x-text-input id="dusun" name="dusun" type="text" class="mt-1 block w-full" :value="$settings['dusun'] ?? ''" required />
                             </div>
                         </div>
 
                         <div class="mt-6 flex justify-end">
-                            <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-md transition duration-150">
-                                Simpan Perubahan
-                            </button>
+                            <x-primary-button>
+                                {{ __('Simpan Perubahan') }}
+                            </x-primary-button>
                         </div>
                     </form>
                 </div>

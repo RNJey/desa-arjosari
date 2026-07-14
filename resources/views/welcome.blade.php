@@ -138,16 +138,20 @@
                     <a href="{{ url('halaman/pengumuman') }}" class="small text-decoration-none text-success fw-semibold">Lihat Semua</a>
                 </div>
                 <div class="list-group list-group-flush">
-                    <a href="{{ url('halaman/pengumuman') }}" class="list-group-item list-group-item-action px-0 border-0 mb-3 transition-hover">
-                        <span class="badge bg-danger bg-opacity-10 text-danger mb-2">Penting</span>
-                        <h6 class="fw-bold mb-1">Pendaftaran Bantuan Langsung Tunai (BLT)</h6>
-                        <small class="text-muted"><i class="bi bi-clock me-1"></i> 2 Hari yang lalu</small>
-                    </a>
-                    <a href="{{ url('halaman/pengumuman') }}" class="list-group-item list-group-item-action px-0 border-0 transition-hover">
-                        <span class="badge bg-success bg-opacity-10 text-success mb-2">Kegiatan</span>
-                        <h6 class="fw-bold mb-1">Kerja Bakti Pembersihan Saluran Irigasi</h6>
-                        <small class="text-muted"><i class="bi bi-clock me-1"></i> 5 Hari yang lalu</small>
-                    </a>
+                    @forelse($beritaTerbaru as $berita)
+                        <a href="{{ url('halaman/pengumuman') }}" class="list-group-item list-group-item-action px-0 border-0 mb-3 transition-hover">
+                            <span class="badge bg-danger bg-opacity-10 text-danger mb-2">{{ $berita->category ?? 'Pengumuman' }}</span>
+                            <h6 class="fw-bold mb-1">{{ $berita->title }}</h6>
+                            <small class="text-muted">
+                                <i class="bi bi-clock me-1"></i> {{ $berita->created_at->format('d M Y') }}
+                            </small>
+                        </a>
+                    @empty
+                        <div class="text-center py-4">
+                            <i class="bi bi-inbox text-muted fs-1 block mb-2"></i>
+                            <p class="text-muted small mb-0">Belum ada pengumuman terbaru.</p>
+                        </div>
+                    @endforelse
                 </div>
             </div>
         </div>
