@@ -7,12 +7,19 @@
                 </div>
                 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <!-- Menu Statistik -->
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-black">
                         Statistik
                     </x-nav-link>
                     
+                    <!-- Menu Berita -->
                     <x-nav-link :href="route('admin.berita')" :active="request()->routeIs('admin.berita')" class="text-black">
                         Berita
+                    </x-nav-link>
+
+                    <!-- Menu Baru: Potensi -->
+                    <x-nav-link :href="route('admin.potensi')" :active="request()->routeIs('admin.potensi')" class="text-black">
+                        Potensi Desa
                     </x-nav-link>
                 </div>
             </div>

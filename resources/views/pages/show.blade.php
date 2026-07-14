@@ -122,6 +122,90 @@
                 <div class="konten-halaman" style="line-height: 1.8; font-size: 1.05rem; color: #4a5568;">
                     {!! $page->content !!}
                 </div>
+
+                @if(isset($potensiData) && $potensiData->count() > 0)
+                    <div class="mt-5 pt-2">
+                        
+                        @if($page->slug == 'pertanian')
+                            <div class="row g-4 mt-2">
+                                @foreach($potensiData as $item)
+                                    @php
+                                        $warna = ['warning', 'danger', 'success', 'primary'];
+                                        $warnaAktif = $warna[$loop->index % count($warna)];
+                                    @endphp
+                                    <div class="col-md-6">
+                                        <div class="card border-0 shadow-sm rounded-4 h-100 transition-hover border-start border-{{ $warnaAktif }} border-4">
+                                            <div class="card-body p-4 d-flex flex-column">
+                                                <h5 class="fw-bold text-dark mb-2">{{ $item->nama_komoditas }}</h5>
+                                                <p class="text-muted small mb-4" style="line-height: 1.6;">{{ $item->deskripsi }}</p>
+                                                <div class="mt-auto d-flex justify-content-between align-items-center">
+                                                    @if($item->info_1)
+                                                        <span class="badge bg-{{ $warnaAktif }} text-dark px-3 py-2 rounded-pill fw-semibold shadow-sm">{{ $item->info_1 }}</span>
+                                                    @else <span></span> @endif
+                                                    
+                                                    @if($item->info_2)
+                                                        <span class="text-{{ $warnaAktif }} fw-bold">{{ $item->info_2 }}</span>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+
+                        @elseif($page->slug == 'perkebunan')
+                            <div class="table-responsive mt-4 rounded-3 shadow-sm border border-success border-opacity-25">
+                                <table class="table table-hover text-center align-middle mb-0">
+                                    <thead style="background-color: #d1e7dd; color: #0f5132;">
+                                        <tr>
+                                            <th class="py-3 border-0">Jenis Komoditas</th>
+                                            <th class="py-3 border-0 border-start border-success border-opacity-25">Luas Lahan (Ha)</th>
+                                            <th class="py-3 border-0 border-start border-success border-opacity-25">Hasil Panen (Ton/Ha)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bg-white">
+                                        
+                                        @foreach($potensiData as $item)
+                                        <tr>
+                                            <td class="py-3 fw-bold text-start ps-4 border-0 border-bottom"><i class="bi bi-tree text-success me-2"></i> {{ $item->nama_komoditas }}</td>
+                                            <td class="py-3 border-0 border-bottom border-start text-muted">{{ $item->info_1 }}</td>
+                                            <td class="py-3 border-0 border-bottom border-start text-success fw-bold">{{ $item->info_2 }}</td>
+                                        </tr>
+                                        @endforeach
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        @elseif($page->slug == 'peternakan')
+                            <div class="row g-4 mt-2">
+                                @foreach($potensiData as $item)
+                                <div class="col-md-4 col-sm-6">
+                                    <div class="card border-0 rounded-4 text-center h-100 p-4 transition-hover" style="background-color: #f8f9fa;">
+                                        <div class="card-body d-flex flex-column justify-content-center align-items-center p-0">
+                                            
+                                            <h2 class="fw-bold text-success mb-2" style="font-size: 2.4rem; letter-spacing: -0.5px;">
+                                                {{ $item->info_1 }}
+                                            </h2>
+                                            
+                                            <h6 class="text-muted fw-normal mb-4" style="font-size: 1rem;">
+                                                {{ $item->nama_komoditas }}
+                                            </h6>
+                                            
+                                            <div class="mt-auto">
+                                                <span class="badge bg-secondary rounded-pill px-3 py-2 text-white" style="font-size: 0.85rem; font-weight: 600;">
+                                                    {{ $item->info_2 }}
+                                                </span>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
+                        @endif
+                    </div>
+                @endif
             </div>
         </div>
 
