@@ -136,62 +136,87 @@
     </main>
 
     <!-- 3. BAGIAN FOOTER -->
-    <footer class="pt-5 pb-4 mt-auto" style="background-color: #1a202c;">
-        <div class="container">
-            <div class="row g-4">
-                <div class="col-md-4">
-                <!-- Brand & Address -->
-                 <div class="d-flex align-items-center mb-3">
-                    <img src="{{ asset('images/logo-desa.png') }}" alt="Logo Desa Arjosari" style="height: 45px; width: auto;" class="me-2 bg-white p-1 rounded-circle">
-                    <h5 class="fw-bold mb-0 text-white">Desa Arjosari</h5>
-                </div>
-                    
-                    <p class="small footer-text mb-4">Jl. Raya Arjosari, Kec. Kalipare, Kab. Malang,<br>Jawa Timur 65165</p>
-                    <div class="d-flex gap-2">
-                        <a href="#" class="btn btn-sm btn-outline-light rounded-circle" style="width: 35px; height: 35px;"><i class="bi bi-facebook"></i></a>
-                        <a href="#" class="btn btn-sm btn-outline-light rounded-circle" style="width: 35px; height: 35px;"><i class="bi bi-instagram"></i></a>
-                        <a href="#" class="btn btn-sm btn-outline-light rounded-circle" style="width: 35px; height: 35px;"><i class="bi bi-youtube"></i></a>
-                    </div>
-                </div>
-
-                <!-- Navigasi -->
-                <div class="col-md-2">
-                    <h6 class="fw-bold mb-3 text-uppercase text-white">Navigasi</h6>
-                    <ul class="list-unstyled small">
-                        <li class="mb-2"><a href="#" class="footer-text text-decoration-none"><i class="bi bi-arrow-right text-success me-1"></i> Beranda</a></li>
-                        <li class="mb-2"><a href="#" class="footer-text text-decoration-none"><i class="bi bi-arrow-right text-success me-1"></i> Profil Desa</a></li>
-                        <li class="mb-2"><a href="#" class="footer-text text-decoration-none"><i class="bi bi-arrow-right text-success me-1"></i> Peta Desa</a></li>
-                         <li class="mb-2"><a href="#" class="footer-text text-decoration-none"><i class="bi bi-arrow-right text-success me-1"></i> Potensi Desa</a></li>
-                        <li class="mb-2"><a href="#" class="footer-text text-decoration-none"><i class="bi bi-arrow-right text-success me-1"></i> Berita</a></li>
-                    </ul>
-                </div>
-
-                <!-- Kontak -->
-                <div class="col-md-3">
-                    <h6 class="fw-bold mb-3 text-uppercase text-white">Kontak</h6>
-                    <ul class="list-unstyled small">
-                        <li class="mb-2 footer-text"><i class="bi bi-telephone text-success me-2"></i> (0341) 123456</li>
-                        <li class="mb-2 footer-text"><i class="bi bi-envelope text-success me-2"></i> arjosari@malangkab.go.id</li>
-                        <li class="mb-2 footer-text"><i class="bi bi-globe text-success me-2"></i> desaarjosari.desa.id</li>
-                    </ul>
-                </div>
-
-                <!-- Lokasi -->
-                <div class="col-md-3">
-                    <h6 class="fw-bold mb-3 text-uppercase text-white">Lokasi</h6>
-                    <div class="bg-dark border border-secondary rounded-3 d-flex flex-column align-items-center justify-content-center p-4 mb-2" style="cursor: pointer;">
-                        <i class="bi bi-geo-alt text-success fs-3 mb-2"></i>
-                        <span class="small footer-text">Buka Maps</span>
-                    </div>
-                    <a href="#" class="text-success text-decoration-none small"><i class="bi bi-box-arrow-up-right me-1"></i> Google Maps</a>
-                </div>
-            </div>
+    <footer class="text-white pt-5 pb-4 mt-auto" style="background-color: #1a2332;">
+    <div class="container">
+        <div class="row g-4">
             
-            <hr class="border-secondary mt-4 mb-3">
-            <div class="text-center small footer-text">
-                &copy; 2026 Desa Arjosari. All rights reserved. Powered by Sistem Informasi Desa
+            <!-- Kolom 1: Profil & Sosial Media -->
+            <div class="col-lg-4 col-md-6">
+                <div class="d-flex align-items-center mb-3">
+                    <!-- Pastikan logo.png ada di folder public/images -->
+                    <img src="{{ asset('images/logo.png') }}" alt="Logo Arjosari" width="40" class="me-2" onerror="this.style.display='none'">
+                    <h5 class="fw-bold mb-0">Desa Arjosari</h5>
+                </div>
+                <p class="small text-white-50 mb-4" style="line-height: 1.8;">
+                    Jl. Raya Arjosari, Kec. Kalipare, Kab. Malang,<br>
+                    Jawa Timur 65165
+                </p>
+                <div class="d-flex gap-2">
+                    <!-- Ganti tanda # dengan link medsos desa jika ada -->
+                    <a href="#" class="btn btn-outline-light btn-sm rounded-circle px-2"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="btn btn-outline-light btn-sm rounded-circle px-2"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="btn btn-outline-light btn-sm rounded-circle px-2"><i class="bi bi-youtube"></i></a>
+                </div>
             </div>
+
+            <!-- Kolom 2: Navigasi Cepat -->
+            <div class="col-lg-2 col-md-6">
+                <h6 class="fw-bold mb-3 text-uppercase" style="letter-spacing: 1px;">Navigasi</h6>
+                <ul class="list-unstyled small">
+                    <li class="mb-2"><a href="{{ url('/') }}" class="text-white-50 text-decoration-none transition-hover">&rarr; Beranda</a></li>
+                    <li class="mb-2"><a href="{{ url('halaman/sejarah-desa') }}" class="text-white-50 text-decoration-none transition-hover">&rarr; Profil Desa</a></li>
+                    <li class="mb-2"><a href="{{ url('halaman/peta-wilayah') }}" class="text-white-50 text-decoration-none transition-hover">&rarr; Peta Desa</a></li>
+                    <li class="mb-2"><a href="{{ url('halaman/pertanian') }}" class="text-white-50 text-decoration-none transition-hover">&rarr; Potensi Desa</a></li>
+                    <li class="mb-2"><a href="{{ url('halaman/pengumuman') }}" class="text-white-50 text-decoration-none transition-hover">&rarr; Berita</a></li>
+                </ul>
+            </div>
+
+            <!-- Kolom 3: Kontak -->
+            <div class="col-lg-3 col-md-6">
+                <h6 class="fw-bold mb-3 text-uppercase" style="letter-spacing: 1px;">Kontak</h6>
+                <ul class="list-unstyled small text-white-50">
+                    <li class="mb-3 d-flex align-items-center">
+                        <i class="bi bi-telephone text-success me-3 fs-5"></i> 
+                        <a href="tel:0341123456" class="text-white-50 text-decoration-none">(0341) 123456</a>
+                    </li>
+                    <li class="mb-3 d-flex align-items-center">
+                        <i class="bi bi-envelope text-success me-3 fs-5"></i> 
+                        <a href="mailto:arjosari@malangkab.go.id" class="text-white-50 text-decoration-none">arjosari@malangkab.go.id</a>
+                    </li>
+                    <li class="mb-3 d-flex align-items-center">
+                        <i class="bi bi-globe text-success me-3 fs-5"></i> 
+                        <a href="{{ url('/') }}" class="text-white-50 text-decoration-none">desaarjosari.desa.id</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Kolom 4: Lokasi / Maps -->
+            <div class="col-lg-3 col-md-6">
+                <h6 class="fw-bold mb-3 text-uppercase" style="letter-spacing: 1px;">Lokasi</h6>
+                
+                <a href="https://www.google.com/maps/place/Arjosari,+Kec.+Kalipare,+Kabupaten+Malang,+Jawa+Timur" target="_blank" class="text-decoration-none">
+                    <div class="card border-0 bg-dark bg-opacity-25 text-center py-4 rounded-3 transition-hover" style="border: 1px solid rgba(255,255,255,0.1) !important;">
+                        <i class="bi bi-geo-alt text-success mb-2" style="font-size: 2rem;"></i>
+                        <span class="text-white small">Buka Maps</span>
+                    </div>
+                </a>
+                
+                <div class="mt-2 text-start">
+                    <a href="https://www.google.com/maps/place/Arjosari,+Kec.+Kalipare,+Kabupaten+Malang,+Jawa+Timur" target="_blank" class="text-success small text-decoration-none transition-hover">
+                        <i class="bi bi-box-arrow-up-right me-1"></i> Google Maps
+                    </a>
+                </div>
+            </div>
+
         </div>
+
+        <hr class="border-secondary my-4" style="opacity: 0.3;">
+        
+        <!-- Copyright -->
+        <div class="text-center small text-white-50">
+            &copy; {{ date('Y') }} Desa Arjosari. All rights reserved. Powered by Sistem Informasi Desa
+        </div>
+    </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

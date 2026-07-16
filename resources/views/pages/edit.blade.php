@@ -29,11 +29,53 @@
                     <script>
                         document.addEventListener("DOMContentLoaded", function() {
                             tinymce.init({
-                                selector: '.rich-editor',
-                                plugins: 'lists link image table code help wordcount',
-                                toolbar: 'undo redo | blocks | bold italic underline | alignleft aligncenter alignright | bullist numlist | link image | table',
+                                selector: '.rich-editor', // Pastikan class textarea-nya sesuai
+                                
+                                // 1. Tambahkan plugin 'image'
+                                plugins: 'lists link image code wordcount', 
+                                
+                                // 2. Tambahkan tombol 'image' di toolbar
+                                toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | bullist numlist | link image', 
+                                
                                 menubar: false,
-                                height: 500,
+                                height: 400,
+
+                                // 3. Tambahkan Handler Upload Gambar
+                                images_upload_handler: function (blobInfo, progress) {
+                                    return new Promise((resolve, reject) => {
+                                        let formData = new FormData();
+                                        // Masukkan file gambar
+                                        formData.append('file', blobInfo.blob(), blobInfo.filename());
+                                        // Masukkan token keamanan Laravel
+                                        formData.append('_token', '{{ csrf_token() }}'); 
+
+                                        // Kirim ke rute Laravel
+                                        fetch('{{ route('upload.image') }}', {
+                                            method: 'POST',
+                                            body: formData
+                                        })
+                                        .then(response => {
+                                            if (!response.ok) throw new Error('Gagal mengunggah: ' + response.status);
+                                            return response.json();
+                                        })
+                                        .then(json => {
+                                            if (!json || typeof json.location != 'string') {
+                                                throw new Error('Respon JSON tidak valid');
+                                            }
+                                            // Sukses! Masukkan URL gambar ke dalam teks editor
+                                            resolve(json.location); 
+                                        })
+                                        .catch(error => {
+                                            reject(error.message);
+                                        });
+                                    });
+                                },
+                                
+                                setup: function (editor) {
+                                    editor.on('change', function () {
+                                        editor.save(); 
+                                    });
+                                }
                             });
                         });
                     </script>

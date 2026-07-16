@@ -182,6 +182,43 @@ Route::delete('/admin/pembangunan/{id}', function ($id) {
     return back()->with('success', 'Proyek berhasil dihapus!');
 })->middleware(['auth'])->name('admin.pembangunan.destroy');
 
+// ==========================================
+// 7. RUTE KELOLA PERANGKAT DESA (ADMIN)
+// ==========================================
+Route::get('/admin/perangkat', function () {
+    $perangkat = \App\Models\PerangkatDesa::all(); 
+    return view('admin-perangkat', compact('perangkat'));
+})->middleware(['auth'])->name('admin.perangkat');
+
+Route::post('/admin/perangkat', function (\Illuminate\Http\Request $request) {
+    $request->validate([
+        'nama' => 'required',
+        'jabatan' => 'required',
+        'foto_profil' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048', // Maksimal 2MB
+    ]);
+
+    $imagePath = null;
+    if ($request->hasFile('foto_profil')) {
+        $imagePath = $request->file('foto_profil')->store('perangkat-images', 'public');
+    }
+
+    \App\Models\PerangkatDesa::create([
+        'nama' => $request->nama,
+        'jabatan' => $request->jabatan,
+        'foto_profil' => $imagePath,
+    ]);
+    return back()->with('success', 'Data Perangkat Desa berhasil ditambahkan!');
+})->middleware(['auth'])->name('admin.perangkat.store');
+
+Route::delete('/admin/perangkat/{id}', function ($id) {
+    $perangkat = \App\Models\PerangkatDesa::findOrFail($id);
+    // Hapus foto fisik dari penyimpanan jika ada
+    if ($perangkat->foto_profil) {
+        \Illuminate\Support\Facades\Storage::disk('public')->delete($perangkat->foto_profil);
+    }
+    $perangkat->delete();
+    return back()->with('success', 'Data berhasil dihapus!');
+})->middleware(['auth'])->name('admin.perangkat.destroy');
 
 // ==========================================
 // HALAMAN PROFIL DINAMIS (WIKIPEDIA EDIT)
@@ -236,15 +273,37 @@ Route::get('/halaman/{slug}', function ($slug) {
         $budayaData = \App\Models\Budaya::where('kategori', $kategori)->latest()->get();
     }
 
-    // Tarik data Pembangunan (TAMBAHAN BARU)
+    // Tarik data Pembangunan
     $pembangunanData = collect();
     if ($slug == 'info-pembangunan') {
         $pembangunanData = \App\Models\Pembangunan::latest()->get();
     }
+
+    // Tarik data Perangkat Desa (TAMBAHAN BARU)
+    $perangkatData = collect();
+    if ($slug == 'pemerintahan') {
+        $perangkatData = \App\Models\PerangkatDesa::all(); 
+    }
     
-    // Pastikan $pembangunanData ikut dikirim!
-    return view('pages.show', compact('page', 'potensiData', 'budayaData', 'settings', 'pembangunanData'));
+    // Pastikan $perangkatData ikut dikirim ke view
+    return view('pages.show', compact('page', 'potensiData', 'budayaData', 'settings', 'pembangunanData', 'perangkatData'));
 });
+
+// ==========================================
+// RUTE KHUSUS UPLOAD GAMBAR TINYMCE
+// ==========================================
+Route::post('/upload-image', function (\Illuminate\Http\Request $request) {
+    if ($request->hasFile('file')) {
+        $file = $request->file('file');
+        // Buat nama file unik agar tidak bentrok
+        $filename = time() . '_' . str_replace(' ', '_', $file->getClientOriginalName());
+        // Simpan ke folder storage/app/public/uploads
+        $path = $file->storeAs('uploads', $filename, 'public');
+        // Kembalikan URL gambarnya ke TinyMCE
+        return response()->json(['location' => asset('storage/' . $path)]);
+    }
+    return response()->json(['error' => 'Gagal mengunggah.'], 400);
+})->name('upload.image');
 
 
 // ==========================================

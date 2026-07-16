@@ -123,6 +123,33 @@
                     {!! $page->content !!}
                 </div>
 
+                @if($page->slug == 'pemerintahan' && isset($perangkatData) && $perangkatData->count() > 0)
+                    <div class="mt-5 pt-4 border-top">
+                        <h4 class="fw-bold text-center mb-5 text-dark">Struktur Organisasi Pemerintah Desa</h4>
+                        
+                        <div class="row g-4 justify-content-center">
+                            @foreach($perangkatData as $item)
+                                <div class="col-md-4 col-sm-6">
+                                    <div class="card border-0 shadow-sm rounded-4 text-center h-100 overflow-hidden transition-hover">
+                                        @if($item->foto_profil)
+                                            <img src="{{ asset('storage/' . $item->foto_profil) }}" alt="{{ $item->nama }}" class="card-img-top object-fit-cover" style="height: 280px; object-position: top;">
+                                        @else
+                                            <div class="bg-secondary bg-opacity-10 d-flex align-items-center justify-content-center" style="height: 280px;">
+                                                <i class="bi bi-person-bounding-box text-secondary" style="font-size: 6rem;"></i>
+                                            </div>
+                                        @endif
+                                        
+                                        <div class="card-body p-4 bg-white z-index-1 position-relative" style="margin-top: -20px; border-radius: 20px 20px 0 0; box-shadow: 0 -10px 20px rgba(0,0,0,0.05);">
+                                            <h6 class="fw-bold mb-1 text-dark">{{ $item->nama }}</h6>
+                                            <p class="small text-success mb-0 fw-bold text-uppercase" style="letter-spacing: 0.5px;">{{ $item->jabatan }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
+
                 @if(isset($potensiData) && $potensiData->count() > 0)
                     <div class="mt-5 pt-2">
                         
@@ -348,7 +375,7 @@
                         @endforelse
                     </div>
                 @endif
-                </div>
+            </div>
         </div>
 
         <div class="col-lg-4">
@@ -371,7 +398,7 @@
                     <i class="bi bi-question-circle fs-1 mb-3"></i>
                     <h6 class="fw-bold mb-2">Butuh Bantuan?</h6>
                     <p class="small mb-4 text-white-50">Hubungi pemerintah desa untuk informasi lebih lanjut.</p>
-                    <a href="{{ url('/#pengaduan-masyarakat') }}" class="btn btn-outline-light rounded-pill w-100">Kontak Kami</a>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfU31A6HTz6y9jGRfQu8A__GA2pFwj_s3rPNSxxbfqQohUSYg/viewform?usp=header" target="_blank" class="btn btn-outline-light rounded-pill w-100 fw-bold">Isi Form Pengaduan</a>
                 </div>
             </div>
 

@@ -81,7 +81,7 @@
         
         <!-- Kotak 2: Pengaduan -->
         <div class="col-md-3 col-6">
-            <a href="#pengaduan-masyarakat" class="text-decoration-none">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfU31A6HTz6y9jGRfQu8A__GA2pFwj_s3rPNSxxbfqQohUSYg/viewform?usp=header" target="_blank" class="text-decoration-none">
                 <div class="card border-0 shadow-sm rounded-4 h-100 p-3 transition-hover">
                     <div class="card-body">
                         <div class="bg-danger bg-opacity-10 rounded-circle d-inline-flex p-3 mb-3"><i class="bi bi-megaphone text-danger fs-4"></i></div>
@@ -99,7 +99,7 @@
                     <div class="card-body">
                         <div class="bg-warning bg-opacity-10 rounded-circle d-inline-flex p-3 mb-3"><i class="bi bi-bag text-warning fs-4"></i></div>
                         <h6 class="fw-bold text-dark">Potensi Desa</h6>
-                        <p class="text-muted small mb-0">Pertanian, perkebunan & UMKM</p>
+                        <p class="text-muted small mb-0">Pertanian, perkebunan & Peternakan</p>
                     </div>
                 </div>
             </a>
@@ -341,7 +341,7 @@
             <div class="d-flex align-items-center mb-2"><i class="bi bi-megaphone me-2"></i> <small class="text-uppercase tracking-wide">Layanan Masyarakat</small></div>
             <h2 class="fw-bold mb-3">Sampaikan Pengaduan Anda</h2>
             <p class="mb-4">Kami siap mendengar dan menyelesaikan setiap masalah dengan cepat</p>
-            <a href="mailto:arjosari@malangkab.go.id" class="btn btn-outline-light rounded-pill px-4">Kirim Email Pengaduan <i class="bi bi-envelope ms-2"></i></a>
+            <a href="mailto:arjosari@malangkab.go.id" class="btn btn-outline-light rounded-pill px-4">Kirim Form Pengaduan <i class="bi bi-envelope ms-2"></i></a>
         </div>
         <div class="position-absolute top-0 end-0 bg-white opacity-10 rounded-circle" style="width: 300px; height: 300px; transform: translate(30%, -30%);"></div>
     </div>
