@@ -305,6 +305,17 @@ Route::post('/upload-image', function (\Illuminate\Http\Request $request) {
     return response()->json(['error' => 'Gagal mengunggah.'], 400);
 })->name('upload.image');
 
+// ==========================================
+// RUTE RAHASIA UNTUK HOSTING TANPA TERMINAL
+// ==========================================
+Route::get('/buat-symlink', function () {
+    try {
+        \Illuminate\Support\Facades\Artisan::call('storage:link');
+        return 'Sukses! Symlink berhasil dibuat. Folder storage sudah terhubung.';
+    } catch (\Exception $e) {
+        return 'Gagal membuat symlink: ' . $e->getMessage();
+    }
+});
 
 // ==========================================
 // RUTE PROFIL ADMIN (BAWAAN BREEZE)

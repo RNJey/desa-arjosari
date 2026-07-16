@@ -7,10 +7,10 @@
     
     <div class="container position-relative z-index-1 d-flex flex-column justify-content-center h-100 text-white" style="padding-top: 10vh;">
         <p class="mb-1 text-uppercase fw-bold text-success">Selamat Datang di</p>
-        <h1 class="display-4 fw-bold">Desa Arjosari</h1>
+        <h1 class="display-5 fw-bold text-wrap">Desa Arjosari</h1>
         <p class="lead">Kec. Kalipare, Kab. Malang, Jawa Timur 65165</p>
         
-        <div class="d-flex gap-3 mt-4">
+        <div class="d-flex flex-wrap gap-3 mt-4">
             <a href="{{ url('halaman/sejarah-desa') }}" class="btn btn-success px-4 py-2 fw-semibold rounded-pill">Profil Desa</a>
             <a href="{{ url('halaman/peta-wilayah') }}" class="btn btn-outline-light px-4 py-2 fw-semibold rounded-pill">Lihat Peta Desa</a>
         </div>
@@ -24,7 +24,7 @@
             <div class="card border-0 shadow-sm rounded-4 text-center py-4 h-100">
                 <div class="card-body">
                     <i class="bi bi-people text-success fs-1 mb-2"></i>
-                    <h3 class="fw-bold text-success mb-0">{{ $settings['penduduk'] ?? '0' }}</h3>
+                    <h3 class="fw-bold text-success mb-0 fs-4">{{ $settings['penduduk'] ?? '0' }}</h3>
                     <p class="text-muted small mb-0">Penduduk (Jiwa)</p>
                 </div>
             </div>
@@ -341,9 +341,9 @@
             <div class="d-flex align-items-center mb-2"><i class="bi bi-megaphone me-2"></i> <small class="text-uppercase tracking-wide">Layanan Masyarakat</small></div>
             <h2 class="fw-bold mb-3">Sampaikan Pengaduan Anda</h2>
             <p class="mb-4">Kami siap mendengar dan menyelesaikan setiap masalah dengan cepat</p>
-            <a href="mailto:arjosari@malangkab.go.id" class="btn btn-outline-light rounded-pill px-4">Kirim Form Pengaduan <i class="bi bi-envelope ms-2"></i></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfU31A6HTz6y9jGRfQu8A__GA2pFwj_s3rPNSxxbfqQohUSYg/viewform?usp=header" target="_blank" class="btn btn-outline-light rounded-pill px-4">Kirim Form Pengaduan <i class="bi bi-box-arrow-up-right ms-2"></i></a>
         </div>
-        <div class="position-absolute top-0 end-0 bg-white opacity-10 rounded-circle" style="width: 300px; height: 300px; transform: translate(30%, -30%);"></div>
+        <div class="position-absolute top-0 end-0 bg-white opacity-10 rounded-circle d-none d-md-block" style="width: 300px; height: 300px; transform: translate(30%, -30%);"></div>
     </div>
 </div>
 @endsection
