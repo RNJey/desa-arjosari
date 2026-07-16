@@ -289,10 +289,31 @@
                 <div class="card border-0 shadow-sm rounded-4 h-100 p-3 transition-hover">
                     <div class="card-body">
                         <h6 class="fw-bold mb-4"><i class="bi bi-calendar-event text-primary me-2"></i> Agenda Desa</h6>
-                        <div class="d-flex mb-3">
-                            <div class="text-center me-3" style="min-width: 50px;"><div class="fw-bold text-success">20</div><div class="small text-success">Jan</div></div>
-                            <div><div class="fw-semibold small">Rapat BPD</div><div class="text-muted" style="font-size: 0.75rem;"><i class="bi bi-clock"></i> 09:00 WIB</div></div>
-                        </div>
+                        
+                        @forelse($agendaTerbaru as $agenda)
+                            @php
+                                $aTgl = $agenda->event_date ? \Carbon\Carbon::parse($agenda->event_date) : $agenda->created_at;
+                                $aJam = $agenda->event_time ? \Carbon\Carbon::parse($agenda->event_time)->format('H:i') : '-';
+                            @endphp
+                            <div class="d-flex mb-3 align-items-center">
+                                <div class="text-center me-3" style="min-width: 50px;">
+                                    <div class="fw-bold text-success" style="font-size: 1.2rem;">{{ $aTgl->format('d') }}</div>
+                                    <div class="small text-success text-uppercase fw-semibold">{{ $aTgl->format('M') }}</div>
+                                </div>
+                                <div>
+                                    <div class="fw-semibold small text-dark mb-1">{{ $agenda->title }}</div>
+                                    <div class="text-muted" style="font-size: 0.75rem;">
+                                        <i class="bi bi-clock"></i> {{ $aJam }} WIB 
+                                        @if($agenda->event_location)
+                                        | <i class="bi bi-geo-alt"></i> {{ \Illuminate\Support\Str::limit($agenda->event_location, 15) }}
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        @empty
+                            <div class="text-center text-muted small py-4">Belum ada agenda terdekat.</div>
+                        @endforelse
+                        
                     </div>
                 </div>
             </a>

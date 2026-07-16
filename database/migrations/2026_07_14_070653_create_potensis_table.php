@@ -18,7 +18,7 @@ return new class extends Migration
         $table->text('deskripsi')->nullable();
         $table->string('info_1')->nullable(); 
         $table->string('info_2')->nullable(); 
-        $table->string('image')->nullable(); // <-- KITA KEMBALIKAN KOLOM INI
+        $table->string('image')->nullable(); 
         $table->timestamps();
     });
 }

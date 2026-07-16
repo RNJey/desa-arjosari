@@ -10,18 +10,28 @@ use App\Models\Post;
 // ==========================================
 Route::get('/', function () {
     $settings = Setting::pluck('value', 'key')->toArray();
-    $beritaTerbaru = Post::latest()->take(2)->get();
+    $beritaTerbaru = Post::where('category', 'Pengumuman')->latest()->take(2)->get();
+    $agendaTerbaru = Post::where('category', 'Agenda')->latest('event_date')->take(2)->get();
     
-    return view('welcome', compact('settings', 'beritaTerbaru'));
+    return view('welcome', compact('settings', 'beritaTerbaru', 'agendaTerbaru'));
 })->name('beranda');
 
+// RUTE PENGUMUMAN
 Route::get('/halaman/pengumuman', function () {
-    $semuaPengumuman = Post::latest()->get();
-    return view('pengumuman', compact('semuaPengumuman'));
+    $semuaPengumuman = \App\Models\Post::where('category', 'Pengumuman')->latest()->get();
+    $pageTitle = 'Pengumuman Desa';
+    return view('pengumuman', compact('semuaPengumuman', 'pageTitle'));
+});
+
+// RUTE AGENDA
+Route::get('/halaman/agenda-desa', function () {
+    $semuaPengumuman = \App\Models\Post::where('category', 'Agenda')->latest()->get();
+    $pageTitle = 'Agenda Desa';
+    return view('pengumuman', compact('semuaPengumuman', 'pageTitle'));
 });
 
 Route::get('/berita/{slug}', function ($slug) {
-    $berita = Post::where('slug', $slug)->firstOrFail();
+    $berita = \App\Models\Post::where('slug', $slug)->firstOrFail();
     return view('baca-berita', compact('berita'));
 });
 
@@ -47,28 +57,34 @@ Route::post('/dashboard/settings', function (\Illuminate\Http\Request $request) 
 // 3. RUTE KELOLA BERITA (ADMIN)
 // ==========================================
 Route::get('/admin/berita', function () {
-    $berita = Post::latest()->get();
+    $berita = \App\Models\Post::latest()->get();
     return view('admin-berita', compact('berita'));
 })->middleware(['auth'])->name('admin.berita');
 
 Route::post('/admin/berita', function (\Illuminate\Http\Request $request) {
+    // 1. Ubah validasi content menjadi 'nullable' (boleh kosong)
     $request->validate([
         'title' => 'required', 
-        'content' => 'required'
+        'category' => 'required',
+        'content' => 'nullable' 
     ]);
     
-    Post::create([
+    // 2. Simpan ke database dengan kalimat default jika kosong
+    \App\Models\Post::create([
         'title' => $request->title,
         'slug' => \Illuminate\Support\Str::slug($request->title) . '-' . time(),
-        'content' => $request->content,
-        'category' => 'Pengumuman',
+        'content' => $request->content ?? '<p>Tidak ada deskripsi tambahan untuk informasi ini.</p>',
+        'category' => $request->category,
+        'event_date' => $request->event_date,
+        'event_time' => $request->event_time,
+        'event_location' => $request->event_location,
     ]);
-    return back()->with('success', 'Pengumuman baru berhasil diterbitkan!');
+    return back()->with('success', 'Informasi baru berhasil diterbitkan!');
 })->middleware(['auth'])->name('admin.berita.store');
 
 Route::delete('/admin/berita/{id}', function ($id) {
-    Post::destroy($id);
-    return back()->with('success', 'Pengumuman berhasil dihapus.');
+    \App\Models\Post::destroy($id);
+    return back()->with('success', 'Informasi berhasil dihapus.');
 })->middleware(['auth'])->name('admin.berita.destroy');
 
 

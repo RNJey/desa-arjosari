@@ -127,7 +127,7 @@
                     <div class="mt-5 pt-2">
                         
                         @if($page->slug == 'pertanian')
-                            <div class="row g-4 mt-2">
+                            <div class="row g-4 mt+2">
                                 @foreach($potensiData as $item)
                                     @php
                                         $warna = ['warning', 'danger', 'success', 'primary'];
