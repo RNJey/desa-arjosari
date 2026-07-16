@@ -21,6 +21,16 @@
                     <x-nav-link :href="route('admin.potensi')" :active="request()->routeIs('admin.potensi')" class="text-black">
                         Potensi Desa
                     </x-nav-link>
+
+                    <!-- Menu Baru: Budaya -->
+                    <x-nav-link :href="route('admin.budaya')" :active="request()->routeIs('admin.budaya')" class="text-black">
+                        Budaya & Adat
+                    </x-nav-link>
+
+                    <!-- Menu Baru: Pembangunan -->
+                    <x-nav-link :href="route('admin.pembangunan')" :active="request()->routeIs('admin.pembangunan')" class="text-black">
+                        Pembangunan
+                    </x-nav-link>
                 </div>
             </div>
             

@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 use App\Models\Setting;
-use App\Models\Post;
 use Illuminate\Database\Seeder;
 use App\Models\Page;
 use App\Models\User;
@@ -28,9 +27,6 @@ class DatabaseSeeder extends Seeder
         Setting::updateOrCreate(['key' => 'kk'], ['value' => '1.940']);
         Setting::updateOrCreate(['key' => 'luas'], ['value' => '1.490,7']);
         Setting::updateOrCreate(['key' => 'dusun'], ['value' => '6']);
-
-        // Catatan: Data "Post" (Berita/Pengumuman) DIHAPUS dari sini. 
-        // Silakan input manual dari Panel Admin -> Kelola Berita.
 
         // =========================================================
         // 2. DATA HALAMAN PROFIL (MODE EDIT CEPAT)
@@ -223,7 +219,7 @@ class DatabaseSeeder extends Seeder
         );
 
         // =========================================================
-        // 3. DATA PENGANTAR HALAMAN POTENSI (Hanya teks pembuka)
+        // 3. PENGANTAR HALAMAN POTENSI (Bersih)
         // =========================================================
 
         Page::updateOrCreate(
@@ -251,22 +247,14 @@ class DatabaseSeeder extends Seeder
         );
 
         // =========================================================
-        // 4. DATA HALAMAN BUDAYA & PEMBANGUNAN (Belum dinamis)
+        // 4. PENGANTAR HALAMAN BUDAYA (Bersih)
         // =========================================================
 
         Page::updateOrCreate(
             ['slug' => 'seni-tradisi'],
             [
                 'title' => 'Seni Tradisi',
-                'content' => '
-                    <div class="content-text">
-                        <p class="mb-4">Desa Arjosari terus berupaya melestarikan seni dan budaya lokal sebagai bagian dari identitas masyarakat.</p>
-                        <div class="row g-4 mb-4">
-                            <div class="col-md-6"><div class="card border-0 shadow-sm rounded-4 h-100 p-4 border-bottom border-4 border-success text-center"><h5 class="fw-bold text-dark mb-2">Grup Musik & Band</h5><p class="text-muted small mb-3">Terdapat 3 unit grup musik/band yang aktif berkesenian.</p></div></div>
-                            <div class="col-md-6"><div class="card border-0 shadow-sm rounded-4 h-100 p-4 border-bottom border-4 border-warning text-center"><h5 class="fw-bold text-dark mb-2">Wayang Kulit</h5><p class="text-muted small mb-3">Seni pertunjukan tradisional yang masih dipertahankan dengan 3 unit perkumpulan.</p></div></div>
-                        </div>
-                    </div>
-                '
+                'content' => '<div class="content-text"><p class="mb-4">Desa Arjosari terus berupaya melestarikan seni dan budaya lokal sebagai bagian dari identitas masyarakat.</p></div>'
             ]
         );
 
@@ -274,15 +262,7 @@ class DatabaseSeeder extends Seeder
             ['slug' => 'peninggalan'],
             [
                 'title' => 'Peninggalan & Situs Sejarah',
-                'content' => '
-                    <div class="content-text">
-                        <p class="mb-4">Tercatat desa ini memiliki potensi situs sejarah serta peninggalan kuno.</p>
-                        <div class="card border-0 shadow-sm rounded-4 mb-4 overflow-hidden p-4 bg-light">
-                            <h5 class="fw-bold mb-2">Situs Lingga Yoni (Recha Gathel)</h5>
-                            <p class="text-muted small mb-0">Di Dusun Tumpakmiri terdapat peninggalan kuno dari Zaman Hindu Syiwa berupa Lingga Yoni yang ditemukan di tepi sumber mata air terbelit akar pepohonan.</p>
-                        </div>
-                    </div>
-                '
+                'content' => '<div class="content-text"><p class="mb-4">Tercatat desa ini memiliki potensi situs sejarah serta peninggalan kuno.</p></div>'
             ]
         );
 
@@ -290,33 +270,19 @@ class DatabaseSeeder extends Seeder
             ['slug' => 'adat-istiadat'],
             [
                 'title' => 'Adat Istiadat',
-                'content' => '
-                    <div class="content-text">
-                        <p class="mb-4">Masyarakat Desa Arjosari sangat memegang teguh nilai-nilai kebudayaan lokal.</p>
-                        <div class="row g-3 mb-5">
-                            <div class="col-md-6"><div class="p-3 bg-light rounded-3 border-start border-4 border-success"><i class="bi bi-check-circle-fill text-success me-2"></i> Upacara Adat Perkawinan & Kelahiran</div></div>
-                            <div class="col-md-6"><div class="p-3 bg-light rounded-3 border-start border-4 border-success"><i class="bi bi-check-circle-fill text-success me-2"></i> Upacara Adat Kematian</div></div>
-                            <div class="col-md-6"><div class="p-3 bg-light rounded-3 border-start border-4 border-success"><i class="bi bi-check-circle-fill text-success me-2"></i> Adat dalam Tanah Pertanian</div></div>
-                            <div class="col-md-6"><div class="p-3 bg-light rounded-3 border-start border-4 border-success"><i class="bi bi-check-circle-fill text-success me-2"></i> Membangun Rumah & Tata Kelola SDA</div></div>
-                        </div>
-                    </div>
-                '
+                'content' => '<div class="content-text"><p class="mb-4">Masyarakat Desa Arjosari sangat memegang teguh nilai-nilai kebudayaan lokal.</p></div>'
             ]
         );
+
+        // =========================================================
+        // 5. HALAMAN LAINNYA (AGENDA & PEMBANGUNAN - Masih Statis)
+        // =========================================================
 
         Page::updateOrCreate(
             ['slug' => 'agenda-desa'],
             [
                 'title' => 'Agenda Desa',
-                'content' => '
-                    <div class="content-text">
-                        <p class="mb-4">Jadwal kegiatan, musyawarah, dan acara penting yang akan dilaksanakan di lingkungan Desa Arjosari.</p>
-                        <div class="row g-4">
-                            <div class="col-md-6"><div class="card border-0 shadow-sm rounded-4 h-100 p-3"><h6 class="fw-bold mb-1">Musrenbangdes 2026</h6><small class="text-muted"><i class="bi bi-geo-alt me-1"></i> Balai Desa Arjosari</small></div></div>
-                            <div class="col-md-6"><div class="card border-0 shadow-sm rounded-4 h-100 p-3"><h6 class="fw-bold mb-1">Posyandu Balita & Lansia</h6><small class="text-muted"><i class="bi bi-geo-alt me-1"></i> Polindes Sumbertimo</small></div></div>
-                        </div>
-                    </div>
-                '
+                'content' => '<div class="content-text"><p class="mb-4">Jadwal kegiatan, musyawarah, dan acara penting yang akan dilaksanakan di lingkungan Desa Arjosari.</p></div>'
             ]
         );
 

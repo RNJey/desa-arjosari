@@ -206,7 +206,149 @@
                         @endif
                     </div>
                 @endif
-            </div>
+
+                @if(isset($budayaData) && $budayaData->count() > 0)
+                    <div class="mt-4 pt-2">
+                        
+                        @if($page->slug == 'seni-tradisi')
+                            <div class="row g-4 mt-2">
+                                @foreach($budayaData as $item)
+                                    @php
+                                        $warna = ['success', 'warning', 'primary', 'danger'];
+                                        $warnaAktif = $warna[$loop->index % count($warna)];
+                                        $ikon = $item->ikon ?? 'bi-music-note-beamed'; // Ikon default
+                                    @endphp
+                                    <div class="col-md-6">
+                                        <div class="card border-0 shadow-sm rounded-4 h-100 p-4 border-bottom border-4 border-{{ $warnaAktif }} text-center transition-hover">
+                                            <div class="bg-{{ $warnaAktif }} bg-opacity-10 rounded-circle d-inline-flex p-3 mx-auto mb-3" style="width: 70px; height: 70px; align-items: center; justify-content: center;">
+                                                <i class="bi {{ $ikon }} text-{{ $warnaAktif }} fs-2"></i>
+                                            </div>
+                                            <h5 class="fw-bold text-dark mb-2">{{ $item->nama_budaya }}</h5>
+                                            <p class="text-muted small mb-4">{{ $item->deskripsi }}</p>
+                                            @if($item->info_tambahan)
+                                                <div class="mt-auto">
+                                                    <span class="badge bg-light text-dark border p-2">{{ $item->info_tambahan }}</span>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+
+                        @elseif($page->slug == 'peninggalan')
+                            <div class="mt-4">
+                                @foreach($budayaData as $item)
+                                    @php $ikon = $item->ikon ?? 'bi-bank'; @endphp
+                                    <div class="card border-0 shadow-sm rounded-4 mb-4 overflow-hidden transition-hover">
+                                        <div class="row g-0 h-100">
+                                            <div class="col-md-3 bg-success bg-opacity-10 d-flex align-items-center justify-content-center p-4" style="min-height: 120px;">
+                                                <i class="bi {{ $ikon }} text-success" style="font-size: 3.5rem;"></i>
+                                            </div>
+                                            <div class="col-md-9 p-4 d-flex flex-column justify-content-center">
+                                                <h5 class="fw-bold mb-2">{{ $item->nama_budaya }}</h5>
+                                                <p class="text-muted small mb-0" style="line-height: 1.6;">{{ $item->deskripsi }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+
+                        @elseif($page->slug == 'adat-istiadat')
+                            <div class="row g-3 mt-3">
+                                @foreach($budayaData as $item)
+                                    @php $ikon = $item->ikon ?? 'bi-check-circle-fill'; @endphp
+                                    <div class="col-md-6">
+                                        <div class="p-3 bg-light rounded-3 border-start border-4 border-success d-flex align-items-center h-100 shadow-sm transition-hover">
+                                            <i class="bi {{ $ikon }} text-success me-3 fs-4"></i> 
+                                            <div>
+                                                <span class="fw-bold d-block text-dark">{{ $item->nama_budaya }}</span>
+                                                @if($item->deskripsi)
+                                                    <small class="text-muted">{{ $item->deskripsi }}</small>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endif
+                    </div>
+                @endif
+
+                @if(in_array($page->slug, ['apbdes', 'status-idm', 'indikator-idm']))
+                    <div class="mt-4 pt-2">
+                        
+                        @if($page->slug == 'apbdes')
+                            <div class="alert alert-success bg-opacity-10 border-success text-center mb-4 p-4 rounded-4 shadow-sm">
+                                <h6 class="text-success fw-bold mb-2">Total Anggaran Belanja & Penerimaan</h6>
+                                <h2 class="fw-bold text-dark mb-0">{{ $settings['apbdes_total'] ?? 'Rp 0' }}</h2>
+                            </div>
+
+                            <div class="row g-4 mb-5">
+                                <div class="col-md-6">
+                                    <div class="card border-0 shadow-sm rounded-4 h-100 p-4 border-start border-4 border-primary bg-light">
+                                        <h6 class="fw-bold text-primary mb-4"><i class="bi bi-arrow-down-circle text-primary me-2"></i> Pendapatan Desa</h6>
+                                        <h3 class="fw-bold text-dark">{{ $settings['apbdes_pendapatan'] ?? 'Rp 0' }}</h3>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card border-0 shadow-sm rounded-4 h-100 p-4 border-start border-4 border-danger bg-light">
+                                        <h6 class="fw-bold text-danger mb-4"><i class="bi bi-arrow-up-circle text-danger me-2"></i> Alokasi Belanja</h6>
+                                        <h3 class="fw-bold text-dark">{{ $settings['apbdes_belanja'] ?? 'Rp 0' }}</h3>
+                                    </div>
+                                </div>
+                            </div>
+
+                        @elseif($page->slug == 'status-idm')
+                            <div class="text-center bg-success bg-opacity-10 rounded-4 py-5 mb-4 border border-success border-opacity-25 shadow-sm">
+                                <h1 class="display-3 fw-bold text-success mb-2">{{ $settings['idm_skor'] ?? '0.0000' }}</h1>
+                                <span class="badge bg-success rounded-pill px-4 py-2 fs-6 mb-2">STATUS: {{ strtoupper($settings['idm_status'] ?? 'Menunggu Data') }}</span>
+                            </div>
+                        
+                        @elseif($page->slug == 'indikator-idm')
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <div class="card border-0 shadow-sm rounded-4 text-center p-4 h-100 border-bottom border-4 border-danger transition-hover">
+                                        <i class="bi bi-heart-pulse text-danger fs-1 mb-2"></i>
+                                        <h2 class="fw-bold mb-1">{{ $settings['idm_sosial'] ?? '0' }}</h2>
+                                        <span class="small fw-semibold text-muted">Indeks Ketahanan Sosial</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card border-0 shadow-sm rounded-4 text-center p-4 h-100 border-bottom border-4 border-primary transition-hover">
+                                        <i class="bi bi-shop text-primary fs-1 mb-2"></i>
+                                        <h2 class="fw-bold mb-1">{{ $settings['idm_ekonomi'] ?? '0' }}</h2>
+                                        <span class="small fw-semibold text-muted">Indeks Ketahanan Ekonomi</span>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+
+                    </div>
+                @endif
+                @if(isset($pembangunanData) && $page->slug == 'info-pembangunan')
+                    <div class="card border-0 shadow-sm rounded-4 p-4 mt-4 bg-light bg-opacity-50">
+                        <h6 class="fw-bold mb-4"><i class="bi bi-cone-striped text-warning me-2"></i> Progres Infrastruktur Tahun Ini</h6>
+                        
+                        @forelse($pembangunanData as $item)
+                            @php
+                                $warna = $item->persentase == 100 ? 'success' : 'primary';
+                                $animasi = $item->persentase < 100 ? 'progress-bar-striped progress-bar-animated' : '';
+                            @endphp
+                            <div class="mb-4">
+                                <div class="d-flex justify-content-between small mb-1">
+                                    <span>{{ $item->nama_proyek }}</span>
+                                    <span class="fw-bold text-{{ $warna }}">{{ $item->persentase }}%</span>
+                                </div>
+                                <div class="progress" style="height: 10px;">
+                                    <div class="progress-bar bg-{{ $warna }} {{ $animasi }}" style="width: {{ $item->persentase }}%;"></div>
+                                </div>
+                            </div>
+                        @empty
+                            <div class="text-center text-muted small py-4">Belum ada data progres pembangunan yang dipublikasikan.</div>
+                        @endforelse
+                    </div>
+                @endif
+                </div>
         </div>
 
         <div class="col-lg-4">

@@ -166,19 +166,19 @@
                             <span class="small text-white text-opacity-75">Detail <i class="bi bi-arrow-right"></i></span>
                         </div>
                         <p class="small text-white text-opacity-75 mb-1">Total Anggaran Belanja & Penerimaan</p>
-                        <h2 class="fw-bold mb-4">Rp 1.708.145.626</h2>
+                        <h2 class="fw-bold mb-4">{{ $settings['apbdes_total'] ?? 'Rp 0' }}</h2>
                         
                         <div class="row g-3">
                             <div class="col-6">
                                 <div class="bg-white bg-opacity-10 rounded-3 p-3 text-center">
                                     <small class="d-block text-white text-opacity-75 mb-1">Pendapatan Desa</small>
-                                    <span class="fw-bold">Rp 1.708 Juta</span>
+                                    <span class="fw-bold">{{ $settings['apbdes_pendapatan'] ?? 'Rp 0' }}</span>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="bg-white bg-opacity-10 rounded-3 p-3 text-center">
                                     <small class="d-block text-white text-opacity-75 mb-1">Alokasi Belanja</small>
-                                    <span class="fw-bold">Rp 1.715 Juta</span>
+                                    <span class="fw-bold">{{ $settings['apbdes_belanja'] ?? 'Rp 0' }}</span>
                                 </div>
                             </div>
                         </div>
@@ -259,8 +259,21 @@
                 <div class="card border-0 shadow-sm rounded-4 h-100 p-3 transition-hover">
                     <div class="card-body">
                         <h6 class="fw-bold mb-4"><i class="bi bi-graph-up-arrow text-success me-2"></i> Info Pembangunan</h6>
-                        <div class="mb-3"><div class="d-flex justify-content-between small mb-1"><span>Jalan Desa</span><span class="fw-bold text-success">85%</span></div><div class="progress" style="height: 6px;"><div class="progress-bar bg-success" style="width: 85%;"></div></div></div>
-                        <div class="mb-3"><div class="d-flex justify-content-between small mb-1"><span>Irigasi</span><span class="fw-bold text-success">70%</span></div><div class="progress" style="height: 6px;"><div class="progress-bar bg-success" style="width: 70%;"></div></div></div>
+                        
+                        @forelse($pembangunanTerbaru as $item)
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between small mb-1">
+                                    <span>{{ $item->nama_proyek }}</span>
+                                    <span class="fw-bold text-success">{{ $item->persentase }}%</span>
+                                </div>
+                                <div class="progress" style="height: 6px;">
+                                    <div class="progress-bar bg-success" style="width: {{ $item->persentase }}%;"></div>
+                                </div>
+                            </div>
+                        @empty
+                            <p class="text-muted small text-center py-2">Belum ada data pembangunan.</p>
+                        @endforelse
+
                     </div>
                 </div>
             </a>
@@ -273,11 +286,11 @@
                     <div class="card-body">
                         <h6 class="fw-bold mb-3"><i class="bi bi-star text-warning me-2"></i> Status IDM</h6>
                         <div class="text-center bg-success bg-opacity-10 rounded-3 py-3 mb-4">
-                            <h2 class="fw-bold text-success mb-1">0.7245</h2>
-                            <span class="badge bg-success rounded-pill px-3">Maju</span>
+                            <h2 class="fw-bold text-success mb-1">{{ $settings['idm_skor'] ?? '0.0000' }}</h2>
+                            <span class="badge bg-success rounded-pill px-3">{{ $settings['idm_status'] ?? 'Menunggu Data' }}</span>
                         </div>
-                        <div class="d-flex justify-content-between small border-bottom pb-2 mb-2"><span>Indeks Sosial</span><span class="fw-bold">0.6890</span></div>
-                        <div class="d-flex justify-content-between small"><span>Indeks Ekonomi</span><span class="fw-bold">0.7120</span></div>
+                        <div class="d-flex justify-content-between small border-bottom pb-2 mb-2"><span>Indeks Sosial</span><span class="fw-bold">{{ $settings['idm_sosial'] ?? '0' }}</span></div>
+                        <div class="d-flex justify-content-between small"><span>Indeks Ekonomi</span><span class="fw-bold">{{ $settings['idm_ekonomi'] ?? '0' }}</span></div>
                     </div>
                 </div>
             </a>

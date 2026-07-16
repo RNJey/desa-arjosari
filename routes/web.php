@@ -12,8 +12,9 @@ Route::get('/', function () {
     $settings = Setting::pluck('value', 'key')->toArray();
     $beritaTerbaru = Post::where('category', 'Pengumuman')->latest()->take(2)->get();
     $agendaTerbaru = Post::where('category', 'Agenda')->latest('event_date')->take(2)->get();
+    $pembangunanTerbaru = \App\Models\Pembangunan::latest()->take(3)->get(); // Tambahan Pembangunan
     
-    return view('welcome', compact('settings', 'beritaTerbaru', 'agendaTerbaru'));
+    return view('welcome', compact('settings', 'beritaTerbaru', 'agendaTerbaru', 'pembangunanTerbaru'));
 })->name('beranda');
 
 // RUTE PENGUMUMAN
@@ -45,11 +46,17 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::post('/dashboard/settings', function (\Illuminate\Http\Request $request) {
-    $data = $request->only(['penduduk', 'kk', 'luas', 'dusun']);
+    // Tambahkan kunci (key) baru untuk APBDes dan IDM
+    $data = $request->only([
+        'penduduk', 'kk', 'luas', 'dusun',
+        'apbdes_total', 'apbdes_pendapatan', 'apbdes_belanja',
+        'idm_skor', 'idm_status', 'idm_sosial', 'idm_ekonomi'
+    ]);
+    
     foreach ($data as $key => $value) {
-        Setting::updateOrCreate(['key' => $key], ['value' => $value]);
+        \App\Models\Setting::updateOrCreate(['key' => $key], ['value' => $value]);
     }
-    return back()->with('success', 'Data statistik desa berhasil diperbarui!');
+    return back()->with('success', 'Data statistik & transparansi berhasil diperbarui!');
 })->middleware(['auth'])->name('settings.update');
 
 
@@ -129,9 +136,55 @@ Route::delete('/admin/potensi/{id}', function ($id) {
     return back()->with('success', 'Potensi Desa berhasil dihapus!');
 })->middleware(['auth'])->name('admin.potensi.destroy');
 
+// ==========================================
+// 5. RUTE KELOLA BUDAYA (ADMIN)
+// ==========================================
+Route::get('/admin/budaya', function () {
+    $budaya = \App\Models\Budaya::latest()->get();
+    return view('admin-budaya', compact('budaya'));
+})->middleware(['auth'])->name('admin.budaya');
+
+Route::post('/admin/budaya', function (\Illuminate\Http\Request $request) {
+    $request->validate([
+        'kategori' => 'required',
+        'nama_budaya' => 'required',
+    ]);
+
+    \App\Models\Budaya::create($request->except('_token'));
+    return back()->with('success', 'Data Budaya berhasil ditambahkan!');
+})->middleware(['auth'])->name('admin.budaya.store');
+
+Route::delete('/admin/budaya/{id}', function ($id) {
+    \App\Models\Budaya::findOrFail($id)->delete();
+    return back()->with('success', 'Data Budaya berhasil dihapus!');
+})->middleware(['auth'])->name('admin.budaya.destroy');
 
 // ==========================================
-// 5. HALAMAN PROFIL DINAMIS (WIKIPEDIA EDIT)
+// 6. RUTE KELOLA PEMBANGUNAN (ADMIN)
+// ==========================================
+Route::get('/admin/pembangunan', function () {
+    $pembangunan = \App\Models\Pembangunan::latest()->get();
+    return view('admin-pembangunan', compact('pembangunan'));
+})->middleware(['auth'])->name('admin.pembangunan');
+
+Route::post('/admin/pembangunan', function (\Illuminate\Http\Request $request) {
+    $request->validate([
+        'nama_proyek' => 'required',
+        'persentase' => 'required|numeric|min:0|max:100',
+    ]);
+
+    \App\Models\Pembangunan::create($request->except('_token'));
+    return back()->with('success', 'Data Proyek Pembangunan berhasil ditambahkan!');
+})->middleware(['auth'])->name('admin.pembangunan.store');
+
+Route::delete('/admin/pembangunan/{id}', function ($id) {
+    \App\Models\Pembangunan::findOrFail($id)->delete();
+    return back()->with('success', 'Proyek berhasil dihapus!');
+})->middleware(['auth'])->name('admin.pembangunan.destroy');
+
+
+// ==========================================
+// HALAMAN PROFIL DINAMIS (WIKIPEDIA EDIT)
 // ==========================================
 
 // Menampilkan Mode Edit (Hanya bisa diakses admin)
@@ -152,19 +205,50 @@ Route::put('/halaman/{slug}', function (\Illuminate\Http\Request $request, $slug
 Route::get('/halaman/{slug}', function ($slug) {
     $page = \App\Models\Page::where('slug', $slug)->firstOrFail();
     
-    // Menarik Data Potensi (Jika halaman yang dibuka adalah halaman potensi)
+    // Tarik data Pengaturan (Untuk APBDes & IDM) ---> INI TAMBAHAN BARU
+    $settings = \App\Models\Setting::pluck('value', 'key')->toArray();
+    
+    // 1. Tarik Data Potensi
     $potensiData = collect();
     if (in_array($slug, ['pertanian', 'perkebunan', 'peternakan'])) {
-        $kategori = ucfirst($slug); // Mengubah "pertanian" menjadi "Pertanian"
+        $kategori = ucfirst($slug);
         $potensiData = \App\Models\Potensi::where('kategori', $kategori)->latest()->get();
     }
+
+    // 2. Tarik Data Budaya
+    $budayaData = collect();
+    if (in_array($slug, ['seni-tradisi', 'peninggalan', 'adat-istiadat'])) {
+        $kategori = '';
+        if($slug == 'seni-tradisi') $kategori = 'Seni Tradisi';
+        if($slug == 'peninggalan') $kategori = 'Peninggalan';
+        if($slug == 'adat-istiadat') $kategori = 'Adat Istiadat';
+        
+        $budayaData = \App\Models\Budaya::where('kategori', $kategori)->latest()->get();
+    }
+
+    // Tarik data Budaya
+    $budayaData = collect();
+    if (in_array($slug, ['seni-tradisi', 'peninggalan', 'adat-istiadat'])) {
+        $kategori = '';
+        if($slug == 'seni-tradisi') $kategori = 'Seni Tradisi';
+        if($slug == 'peninggalan') $kategori = 'Peninggalan';
+        if($slug == 'adat-istiadat') $kategori = 'Adat Istiadat';
+        $budayaData = \App\Models\Budaya::where('kategori', $kategori)->latest()->get();
+    }
+
+    // Tarik data Pembangunan (TAMBAHAN BARU)
+    $pembangunanData = collect();
+    if ($slug == 'info-pembangunan') {
+        $pembangunanData = \App\Models\Pembangunan::latest()->get();
+    }
     
-    return view('pages.show', compact('page', 'potensiData'));
+    // Pastikan $pembangunanData ikut dikirim!
+    return view('pages.show', compact('page', 'potensiData', 'budayaData', 'settings', 'pembangunanData'));
 });
 
 
 // ==========================================
-// 6. RUTE PROFIL ADMIN (BAWAAN BREEZE)
+// RUTE PROFIL ADMIN (BAWAAN BREEZE)
 // ==========================================
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
