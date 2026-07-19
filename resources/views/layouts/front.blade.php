@@ -35,71 +35,80 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a class="nav-link text-success fw-bold" href="{{ url('/') }}">Beranda</a></li>
-                    
-                    <!-- Dropdown Profil -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Profil Desa</a>
-                        <ul class="dropdown-menu border-0 shadow-sm">
-                            <li><a class="dropdown-item" href="{{ url('halaman/sejarah-desa') }}">Sejarah Desa</a></li>
-                            <li><a class="dropdown-item" href="{{ url('halaman/visi-misi') }}">Visi dan Misi</a></li>
-                            <li><a class="dropdown-item" href="{{ url('halaman/pemerintahan') }}">Pemerintahan</a></li>
-                            <li><a class="dropdown-item" href="{{ url('halaman/data-kependudukan') }}">Data Kependudukan</a></li>
-                        </ul>
-                    </li>
-                    <!-- Dropdown Peta -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Peta Desa</a>
-                        <ul class="dropdown-menu border-0 shadow-sm">
-                            <li><a class="dropdown-item" href="{{ url('halaman/peta-wilayah') }}">Peta Wilayah</a></li>
-                            <li><a class="dropdown-item" href="{{ url('halaman/pembagian-desa') }}">Pembagian Desa</a></li>
-                        </ul>
-                    </li>
-                    <!-- Dropdown Potensi Desa -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Potensi Desa</a>
-                        <ul class="dropdown-menu border-0 shadow-sm">
-                            <li><a class="dropdown-item" href="{{ url('halaman/pertanian') }}">Pertanian</a></li>
-                            <li><a class="dropdown-item" href="{{ url('halaman/perkebunan') }}">Perkebunan</a></li>
-                            <li><a class="dropdown-item" href="{{ url('halaman/peternakan') }}">Peternakan</a></li>
-                        </ul>
-                    </li>
-                    <!-- Dropdown Berita -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Berita</a>
-                        <ul class="dropdown-menu border-0 shadow-sm">
-                            <li><a class="dropdown-item" href="{{ url('halaman/pengumuman') }}">Pengumuman</a></li>
-                            <li><a class="dropdown-item" href="{{ url('halaman/agenda-desa') }}">Agenda Desa</a></li>
-                        </ul>
-                    </li>
-                    <!-- Dropdown Budaya -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Budaya</a>
-                        <ul class="dropdown-menu border-0 shadow-sm">
-                            <li><a class="dropdown-item" href="{{ url('halaman/seni-tradisi') }}">Seni Tradisi</a></li>
-                            <li><a class="dropdown-item" href="{{ url('halaman/peninggalan') }}">Peninggalan</a></li>
-                            <li><a class="dropdown-item" href="{{ url('halaman/adat-istiadat') }}">Adat Istiadat</a></li>
-                        </ul>
-                    </li>
-                    <!-- Dropdown Pembangunan -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Pembangunan</a>
-                        <ul class="dropdown-menu border-0 shadow-sm">
-                            <li><a class="dropdown-item" href="{{ url('halaman/info-pembangunan') }}">Info Pembangunan</a></li>
-                            <li><a class="dropdown-item" href="{{ url('halaman/apbdes') }}">APBDes</a></li>
-                            <li><a class="dropdown-item" href="{{ url('halaman/dana-desa') }}">Dana Desa</a></li>
-                        </ul>
-                    </li>
-                    <!-- Dropdown IDM -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">IDM</a>
-                        <ul class="dropdown-menu border-0 shadow-sm">
-                            <li><a class="dropdown-item" href="{{ url('halaman/status-idm') }}">Status IDM</a></li>
-                            <li><a class="dropdown-item" href="{{ url('halaman/indikator-idm') }}">Indikator IDM</a></li>
-                            <li><a class="dropdown-item" href="{{ url('halaman/perkembangan-idm') }}">Perkembangan IDM</a></li>
-                        </ul>
-                    </li>
-                </ul>
+    <!-- Beranda -->
+    <li class="nav-item">
+        <a class="nav-link {{ request()->is('/') ? 'text-success fw-bold' : '' }}" href="{{ url('/') }}">Beranda</a>
+    </li>
+    
+    <!-- Dropdown Profil -->
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle {{ request()->is('halaman/sejarah-desa', 'halaman/visi-misi', 'halaman/pemerintahan', 'halaman/data-kependudukan') ? 'text-success fw-bold' : '' }}" href="#" data-bs-toggle="dropdown">Profil Desa</a>
+        <ul class="dropdown-menu border-0 shadow-sm">
+            <li><a class="dropdown-item" href="{{ url('halaman/sejarah-desa') }}">Sejarah Desa</a></li>
+            <li><a class="dropdown-item" href="{{ url('halaman/visi-misi') }}">Visi dan Misi</a></li>
+            <li><a class="dropdown-item" href="{{ url('halaman/pemerintahan') }}">Pemerintahan</a></li>
+            <li><a class="dropdown-item" href="{{ url('halaman/data-kependudukan') }}">Data Kependudukan</a></li>
+        </ul>
+    </li>
+
+    <!-- Dropdown Peta -->
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle {{ request()->is('halaman/peta-wilayah', 'halaman/pembagian-desa') ? 'text-success fw-bold' : '' }}" href="#" data-bs-toggle="dropdown">Peta Desa</a>
+        <ul class="dropdown-menu border-0 shadow-sm">
+            <li><a class="dropdown-item" href="{{ url('halaman/peta-wilayah') }}">Peta Wilayah</a></li>
+            <li><a class="dropdown-item" href="{{ url('halaman/pembagian-desa') }}">Pembagian Desa</a></li>
+        </ul>
+    </li>
+
+    <!-- Dropdown Potensi Desa -->
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle {{ request()->is('halaman/pertanian', 'halaman/perkebunan', 'halaman/peternakan') ? 'text-success fw-bold' : '' }}" href="#" data-bs-toggle="dropdown">Potensi Desa</a>
+        <ul class="dropdown-menu border-0 shadow-sm">
+            <li><a class="dropdown-item" href="{{ url('halaman/pertanian') }}">Pertanian</a></li>
+            <li><a class="dropdown-item" href="{{ url('halaman/perkebunan') }}">Perkebunan</a></li>
+            <li><a class="dropdown-item" href="{{ url('halaman/peternakan') }}">Peternakan</a></li>
+        </ul>
+    </li>
+
+    <!-- Dropdown Berita -->
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle {{ request()->is('halaman/pengumuman', 'halaman/agenda-desa') ? 'text-success fw-bold' : '' }}" href="#" data-bs-toggle="dropdown">Berita</a>
+        <ul class="dropdown-menu border-0 shadow-sm">
+            <li><a class="dropdown-item" href="{{ url('halaman/pengumuman') }}">Pengumuman</a></li>
+            <li><a class="dropdown-item" href="{{ url('halaman/agenda-desa') }}">Agenda Desa</a></li>
+        </ul>
+    </li>
+
+    <!-- Dropdown Budaya -->
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle {{ request()->is('halaman/seni-tradisi', 'halaman/peninggalan', 'halaman/adat-istiadat') ? 'text-success fw-bold' : '' }}" href="#" data-bs-toggle="dropdown">Budaya</a>
+        <ul class="dropdown-menu border-0 shadow-sm">
+            <li><a class="dropdown-item" href="{{ url('halaman/seni-tradisi') }}">Seni Tradisi</a></li>
+            <li><a class="dropdown-item" href="{{ url('halaman/peninggalan') }}">Peninggalan</a></li>
+            <li><a class="dropdown-item" href="{{ url('halaman/adat-istiadat') }}">Adat Istiadat</a></li>
+        </ul>
+    </li>
+
+    <!-- Dropdown Pembangunan -->
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle {{ request()->is('halaman/info-pembangunan', 'halaman/apbdes', 'halaman/dana-desa') ? 'text-success fw-bold' : '' }}" href="#" data-bs-toggle="dropdown">Pembangunan</a>
+        <ul class="dropdown-menu border-0 shadow-sm">
+            <li><a class="dropdown-item" href="{{ url('halaman/info-pembangunan') }}">Info Pembangunan</a></li>
+            <li><a class="dropdown-item" href="{{ url('halaman/apbdes') }}">APBDes</a></li>
+            <li><a class="dropdown-item" href="{{ url('halaman/dana-desa') }}">Dana Desa</a></li>
+        </ul>
+    </li>
+
+    <!-- Dropdown IDM -->
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle {{ request()->is('halaman/status-idm', 'halaman/indikator-idm', 'halaman/perkembangan-idm') ? 'text-success fw-bold' : '' }}" href="#" data-bs-toggle="dropdown">IDM</a>
+        <ul class="dropdown-menu border-0 shadow-sm">
+            <li><a class="dropdown-item" href="{{ url('halaman/status-idm') }}">Status IDM</a></li>
+            <li><a class="dropdown-item" href="{{ url('halaman/indikator-idm') }}">Indikator IDM</a></li>
+            <li><a class="dropdown-item" href="{{ url('halaman/perkembangan-idm') }}">Perkembangan IDM</a></li>
+        </ul>
+    </li>
+        </ul>
                 
                 <div class="d-flex align-items-center gap-3 ms-lg-3 mt-3 mt-lg-0">
                     <a href="{{ url('/#pengaduan-masyarakat') }}" class="btn btn-success rounded-pill px-4">Pengaduan</a>

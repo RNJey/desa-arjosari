@@ -2,7 +2,7 @@
 
 @section('content')
 <!-- Hero Section -->
-<div class="position-relative" style="background-image: url('{{ asset('images/banner-arjosari.JPEG') }}'); background-size: cover; background-position: center; min-height: 60vh;">
+<div class="position-relative" style="background-image: url('{{ asset('images/banner-arjosari.jpeg') }}'); background-size: cover; background-position: center; min-height: 60vh;">
     <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark" style="opacity: 0.6;"></div>
     
     <div class="container position-relative z-index-1 d-flex flex-column justify-content-center h-100 text-white" style="padding-top: 10vh;">
