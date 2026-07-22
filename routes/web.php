@@ -46,7 +46,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::post('/dashboard/settings', function (\Illuminate\Http\Request $request) {
-    // Tambahkan kunci (key) baru untuk APBDes dan IDM
+    // 1. Simpan data statistik dan teks
     $data = $request->only([
         'penduduk', 'kk', 'luas', 'dusun',
         'apbdes_total', 'apbdes_pendapatan', 'apbdes_belanja',
@@ -56,7 +56,18 @@ Route::post('/dashboard/settings', function (\Illuminate\Http\Request $request) 
     foreach ($data as $key => $value) {
         \App\Models\Setting::updateOrCreate(['key' => $key], ['value' => $value]);
     }
-    return back()->with('success', 'Data statistik & transparansi berhasil diperbarui!');
+
+    // 2. TAMBAHAN BARU: Logika penangkapan dan penyimpanan gambar background
+    if ($request->hasFile('hero_bg')) {
+        $path = $request->file('hero_bg')->store('hero-images', 'public');
+        
+        \App\Models\Setting::updateOrCreate(
+            ['key' => 'hero_bg'], 
+            ['value' => $path]
+        );
+    }
+
+    return back()->with('success', 'Data statistik & background berhasil diperbarui!');
 })->middleware(['auth'])->name('settings.update');
 
 

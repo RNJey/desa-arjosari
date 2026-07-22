@@ -56,7 +56,7 @@
         <a class="nav-link dropdown-toggle {{ request()->is('halaman/peta-wilayah', 'halaman/pembagian-desa') ? 'text-success fw-bold' : '' }}" href="#" data-bs-toggle="dropdown">Peta Desa</a>
         <ul class="dropdown-menu border-0 shadow-sm">
             <li><a class="dropdown-item" href="{{ url('halaman/peta-wilayah') }}">Peta Wilayah</a></li>
-            <li><a class="dropdown-item" href="{{ url('halaman/pembagian-desa') }}">Pembagian Desa</a></li>
+            <li><a class="dropdown-item" href="{{ url('halaman/pembagian-desa') }}">Pembagian Dusun</a></li>
         </ul>
     </li>
 

@@ -15,7 +15,7 @@
                 </div>
             @endif
 
-            <form action="{{ route('settings.update') }}" method="POST">
+            <form action="{{ route('settings.update') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 
                 <div class="bg-white shadow-sm sm:rounded-lg mb-6">
@@ -84,6 +84,12 @@
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label fw-bold">Background Halaman Depan</label>
+                    <input type="file" name="hero_bg" class="form-control" accept="image/*">
+                    <small class="text-muted">Upload gambar baru untuk mengganti background. Biarkan kosong jika tidak ingin diubah.</small>
                 </div>
 
                 <div class="flex justify-end pb-12">

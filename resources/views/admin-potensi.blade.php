@@ -86,7 +86,7 @@
                                     <td class="p-4">
                                         <p class="font-bold text-gray-800">{{ $item->nama_komoditas }}</p>
                                         <p class="text-xs font-semibold text-green-600 mb-1">{{ $item->kategori }}</p>
-                                        <p class="text-xs text-gray-500 mt-1">{{ \Illuminate\Support\Str::limit($item->description, 50) }}</p>
+                                        <p class="text-xs text-gray-500 mt-1">{{ \Illuminate\Support\Str::limit($item->deskripsi, 50) }}</p>
                                     </td>
                                     <td class="p-4 text-center align-middle">
                                         <form action="{{ route('admin.potensi.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Hapus potensi ini?');">

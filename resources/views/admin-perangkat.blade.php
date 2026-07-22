@@ -61,7 +61,7 @@
                                         @if($item->foto_profil)
                                             <img src="{{ asset('storage/' . $item->foto_profil) }}" alt="Foto" class="h-16 w-16 rounded-full object-cover border shadow-sm">
                                         @else
-                                            <div class="h-16 w-16 rounded-full bg-gray-200 flex items-center justify-content-center text-gray-500 border shadow-sm">
+                                            <div class="h-16 w-16 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 border shadow-sm">
                                                 <i class="bi bi-person fs-3 ms-3"></i>
                                             </div>
                                         @endif

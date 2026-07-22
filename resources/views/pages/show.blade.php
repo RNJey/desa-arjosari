@@ -20,7 +20,7 @@
             'icon' => 'bi-geo-alt',
             'items' => [
                 'peta-wilayah' => 'Peta Wilayah',
-                'pembagian-desa' => 'Pembagian Desa',
+                'pembagian-desa' => 'Pembagian Dusun', // <--- 1. UBAH DI SINI UNTUK SIDEBAR
             ]
         ],
         'potensi' => [
@@ -67,8 +67,12 @@
                 'perkembangan-idm' => 'Perkembangan IDM',
             ]
         ],
-        
     ];
+
+    // 2. TRIK OVERRIDE JUDUL DATABASE UNTUK HEADER
+    if ($page->slug == 'pembagian-desa') {
+        $page->title = 'Pembagian Dusun'; 
+    }
 
     // Cek halaman saat ini masuk ke grup mana
     $activeGroup = null;
@@ -78,7 +82,6 @@
             break;
         }
     }
-
     // Fallback jika tidak ada di grup (misal halaman baru)
     if(!$activeGroup) {
         $activeGroup = [

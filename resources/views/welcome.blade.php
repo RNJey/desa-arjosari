@@ -2,10 +2,15 @@
 
 @section('content')
 <!-- Hero Section -->
-<div class="position-relative" style="background-image: url('{{ asset('images/banner-arjosari.jpeg') }}'); background-size: cover; background-position: center; min-height: 60vh;">
-    <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark" style="opacity: 0.6;"></div>
-    
-    <div class="container position-relative z-index-1 d-flex flex-column justify-content-center h-100 text-white" style="padding-top: 10vh;">
+<div class="position-relative" 
+     style="background-image: url('{{ !empty($settings['hero_bg']) ? asset('storage/' . str_replace('\\', '/', $settings['hero_bg'])) : asset('images/banner-arjosari.jpg') }}'); 
+            background-size: cover; 
+            background-position: center; 
+            min-height: 60vh;">
+
+    <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark" style="opacity: 0.4;"></div>
+
+    <div class="container position-relative z-index-1 d-flex flex-column justify-content-center h-100 text-white" style="padding-top: 15vh; padding-bottom: 10vh;">
         <p class="mb-1 text-uppercase fw-bold text-success">Selamat Datang di</p>
         <h1 class="display-5 fw-bold text-wrap">Desa Arjosari</h1>
         <p class="lead">Kec. Kalipare, Kab. Malang, Jawa Timur 65165</p>
